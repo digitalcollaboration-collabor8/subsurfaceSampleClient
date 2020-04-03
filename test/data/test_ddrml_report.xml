@@ -1,0 +1,1011 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<drillReports xmlns="http://www.witsml.org/schemas/1series" xmlns:abs="http://www.energistics.org/schemas/abstract" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sawsdl="http://www.w3.org/ns/sawsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.4.0.0" xsi:schemaLocation="http://www.witsml.org/schemas/1series file:///C:/Projects/Energistics/WITSML_v1.4.1.1_Data_Schema/witsml_v1.4.1.1_data/xsd_schemas/obj_drillReport.xsd">
+	<drillReport>
+		<nameWell>2/4-X-4</nameWell>
+		<nameWellbore>2/4-X-4 A</nameWellbore>
+		<name>Daily Drilling Report for DDR TEST January 2015</name>
+		<dTimStart>2015-01-01T00:00:00.0Z</dTimStart>
+		<dTimEnd>2015-01-01T23:59:59.0Z</dTimEnd>
+		<versionKind>normal</versionKind>
+		<createDate>2015-01-02T00:00:00.0Z</createDate>
+		<wellAlias>
+			<name>2/4-X-4</name>
+			<namingSystem>NPD code</namingSystem>
+		</wellAlias>
+		<wellboreAlias>
+			<name>2/4-X-4 A</name>
+			<namingSystem>NPD code</namingSystem>
+		</wellboreAlias>
+		<wellboreAlias>
+			<name>5069</name>
+			<namingSystem>NPD number</namingSystem>
+		</wellboreAlias>
+		<wellDatum defaultMeasuredDepth="false" defaultVerticalDepth="false">
+			<name>Kelly Bushing</name>
+			<code>KB</code>
+			<datumName code="ssss" namingSystem="COPNO">This is a datum name</datumName>
+			<kind>Rotary Table</kind>
+			<kind>ssss</kind>
+			<wellbore>
+				<wellboreReference>--None--</wellboreReference>
+				<wellParent>2/4-X-4</wellParent>
+			</wellbore>
+			<rig>
+				<rigReference>No</rigReference>
+				<wellboreParent>--None--</wellboreParent>
+				<wellParent>2/4-X-4</wellParent>
+			</rig>
+			<elevation datum="SL" uom="m">77.62</elevation>
+			<measuredDepth datum="SL" uom="m">61.6</measuredDepth>
+			<horizontalLocation>
+				<wellCRS>Clear</wellCRS>
+				<latitude uom="dega">18.9</latitude>
+				<longitude uom="dega">7.55</longitude>
+				<original>false</original>
+				<description>this is a horizontal location comment</description>
+			</horizontalLocation>
+			<comment>this is a well datum comment for Kelly Bushing</comment>
+		</wellDatum>
+		<wellDatum defaultElevation="false" defaultMeasuredDepth="false" defaultVerticalDepth="true">
+			<name>Sea Level</name>
+			<code>SL</code>
+			<datumName code="Th" namingSystem="Co">To pr</datumName>
+			<kind>kind</kind>
+			<kind>another kind</kind>
+			<wellbore>
+				<wellboreReference>I sug</wellboreReference>
+				<wellParent>2/4-X-4</wellParent>
+			</wellbore>
+			<rig>
+				<rigReference>No</rigReference>
+				<wellboreParent>--None--</wellboreParent>
+				<wellParent>2/4-X-4</wellParent>
+			</rig>
+			<elevation datum="SL" uom="m">801</elevation>
+			<measuredDepth datum="SL" uom="m">499</measuredDepth>
+			<horizontalLocation uid="Invalid">
+				<wellCRS>well crs 26</wellCRS>
+				<projectedX uom="fm">14</projectedX>
+				<projectedY uom="chSe">64</projectedY>
+				<original>true</original>
+				<description>this is a horizontal location comment</description>
+			</horizontalLocation>
+			<comment>this is a well datum comment for Sea level</comment>
+		</wellDatum>
+		<wellCRS>
+			<name>WGS84</name>
+			<mapProjection>
+				<nameCRS code="ssss" namingSystem="COPNO">this is the nameCRS</nameCRS>
+				<projectionCode>Cassini</projectionCode>
+				<projectedFrom>Neverthele</projectedFrom>
+				<stdParallel1 uom="dega">96.34</stdParallel1>
+				<stdParallel2 uom="dega">96.0</stdParallel2>
+				<centralMeridian uom="dega">90.69</centralMeridian>
+				<originLatitude uom="dega">81.18</originLatitude>
+				<originLongitude uom="dega">29.8</originLongitude>
+				<latitude1 uom="dega">38.0</latitude1>
+				<longitude1 uom="dega">75.45</longitude1>
+				<latitude2 uom="dega">92.26</latitude2>
+				<longitude2 uom="dega">16.49</longitude2>
+				<latitudeForScale uom="dega">67.23</latitudeForScale>
+				<longitudeForScale uom="dega">10.52</longitudeForScale>
+				<trueScaleLatitude uom="dega">44.39</trueScaleLatitude>
+				<spheroidRadius uom="m">604</spheroidRadius>
+				<scaleFactor>511</scaleFactor>
+				<methodVariant>default</methodVariant>
+				<perspectiveHeight uom="m">56</perspectiveHeight>
+				<zone>5N</zone>
+				<NADType>NAD83</NADType>
+				<falseEasting uom="m">522</falseEasting>
+				<falseNorthing uom="m">730</falseNorthing>
+				<bearing uom="dega">59.58</bearing>
+				<hemisphere>southern</hemisphere>
+				<description>this is the mapProjection comment</description>
+				<parameter description="ssss" index="1" name="ssss" uom="ssss">this is a parameter</parameter>
+				<parameter description="ssss" index="8" name="ssss" uom="ssss">this is another parameter</parameter>
+			</mapProjection>
+			<description>this is the wellCRS comment</description>
+		</wellCRS>
+		<wellCRS>
+			<name>WGS84</name>
+			<geographic>
+				<nameCRS code="50" namingSystem="US">Geographic CRS</nameCRS>
+				<geodeticDatumCode>NGRA</geodeticDatumCode>
+				<xTranslation uom="cm">85</xTranslation>
+				<yTranslation uom="yd">635</yTranslation>
+				<zTranslation uom="ftInd(37)">5</zTranslation>
+				<xRotation uom="dega">79</xRotation>
+				<yRotation uom="dega">30</yRotation>
+				<zRotation uom="dega">72</zRotation>
+				<scaleFactor>36</scaleFactor>
+				<ellipsoidCode>SA69</ellipsoidCode>
+				<ellipsoidSemiMajorAxis uom="in/10">28</ellipsoidSemiMajorAxis>
+				<ellipsoidInverseFlattening>50.99</ellipsoidInverseFlattening>
+			</geographic>
+			<description>this is the wellCRS comment</description>
+		</wellCRS>
+		<wellboreInfo>
+			<dTimSpud>2015-01-01T05:00:00.0Z</dTimSpud>
+			<dTimPreSpud>2015-01-01T02:00:00.0Z</dTimPreSpud>
+			<dateDrillComplete>2015-01-01</dateDrillComplete>
+			<daysAhead>4</daysAhead>
+			<operator>ConocoPhillips</operator>
+			<drillContractor>ODFJELL DRILLING MANAGEMENT AS</drillContractor>
+			<rigAlias>
+				<name>MÆRSK GIANT</name>
+				<namingSystem>NPD Name</namingSystem>
+			</rigAlias>
+			<rigAlias>
+				<name>278245</name>
+				<namingSystem>NPD code</namingSystem>
+			</rigAlias>
+			<comment>this is a wellbore info comment</comment>
+		</wellboreInfo>
+		<statusInfo>
+			<reportNo>1</reportNo>
+			<dTim>2015-01-01T23:59:59.0Z</dTim>
+			<md datum="KB" uom="m">3809.25</md>
+			<tvd datum="KB" uom="m">3034.15</tvd>
+			<mdPlugTop datum="KB" uom="m">1365</mdPlugTop>
+			<diaHole uom="in">19.22</diaHole>
+			<dTimDiaHoleStart>2015-01-01T00:00:00.0Z</dTimDiaHoleStart>
+			<mdDiaHoleStart datum="KB" uom="m">1141.44</mdDiaHoleStart>
+			<diaPilot uom="in">16.3</diaPilot>
+			<mdDiaPilotPlan datum="KB" uom="m">1167</mdDiaPilotPlan>
+			<tvdDiaPilotPlan datum="KB" uom="m">1061</tvdDiaPilotPlan>
+			<typeWellbore>reentry</typeWellbore>
+			<primaryConveyance>drillpipe</primaryConveyance>
+			<mdKickoff datum="KB" uom="m">1511.58</mdKickoff>
+			<tvdKickoff datum="KB" uom="m">1919.87</tvdKickoff>
+			<strengthForm uom="g/cm3">1066</strengthForm>
+			<mdStrengthForm datum="KB" uom="m">1146</mdStrengthForm>
+			<tvdStrengthForm datum="KB" uom="m">1159</tvdStrengthForm>
+			<diaCsgLast uom="in">8</diaCsgLast>
+			<mdCsgLast datum="KB" uom="m">3583.8</mdCsgLast>
+			<tvdCsgLast datum="KB" uom="m">3815.53</tvdCsgLast>
+			<presTestType>leak off test</presTestType>
+			<mdPlanned datum="KB" uom="m">0</mdPlanned>
+			<distDrill uom="m">10.82</distDrill>
+			<elevKelly datum="SL" uom="m">58.68</elevKelly>
+			<wellheadElevation uom="m">-300</wellheadElevation>
+			<waterDepth uom="m">1063</waterDepth>
+			<sum24Hr>A summary that sumarizes the activities performed and the status of the ongoing activities from the reporting period. Please note that this is a test report and contains test values only.</sum24Hr>
+			<forecast24Hr>A summary that sumarizes the planned activities the next reporting period.</forecast24Hr>
+			<ropCurrent uom="m/h">1097</ropCurrent>
+			<tightWell>false</tightWell>
+			<hpht>true</hpht>
+			<avgPresBH uom="psig">1048</avgPresBH>
+			<avgTempBH uom="degC">1091</avgTempBH>
+			<fixedRig>true</fixedRig>
+		</statusInfo>
+		<bitRecord>
+			<numBitRun>1</numBitRun>
+			<numBit>1</numBit>
+			<diaBit uom="in">7.18</diaBit>
+			<manufacturer>Bit manufacturer It must be emphasize</manufacturer>
+			<codeMfg>MX-29</codeMfg>
+			<dullGrade>We have already seen that this</dullGrade>
+			<codeIADC>114</codeIADC>
+			<condFinalInner>1</condFinalInner>
+			<condFinalOuter>2</condFinalOuter>
+			<condFinalDull>OC</condFinalDull>
+			<condFinalLocation>123XYZ</condFinalLocation>
+			<condFinalBearing>F</condFinalBearing>
+			<condFinalGauge>I</condFinalGauge>
+			<condFinalOther>a value</condFinalOther>
+			<condFinalReason>LIH</condFinalReason>
+			<bitRun>
+				<eTimOpBit uom="h">12.03</eTimOpBit>
+				<mdHoleStart datum="KB" uom="m">1095</mdHoleStart>
+				<mdHoleStop datum="KB" uom="m">1554</mdHoleStop>
+				<ropAv uom="m/h">13.68</ropAv>
+				<mdHoleMadeRun datum="KB" uom="m">1301</mdHoleMadeRun>
+				<hrsDrilled uom="h">19.4</hrsDrilled>
+				<hrsDrilledRun uom="h">15.65</hrsDrilledRun>
+				<mdTotHoleMade datum="KB" uom="m">1178</mdTotHoleMade>
+				<totHrsDrilled uom="h">183</totHrsDrilled>
+				<totRop uom="m/h">18.16</totRop>
+			</bitRun>
+			<nozzle>
+				<numNozzle>1</numNozzle>
+				<diaNozzle uom="in/32">11</diaNozzle>
+			</nozzle>
+			<comment>A comment on the bit record</comment>
+		</bitRecord>
+		<bitRecord>
+			<numBitRun>1</numBitRun>
+			<numBit>1</numBit>
+			<diaBit uom="in">7.18</diaBit>
+			<manufacturer>Bit manufacturer It must be emphasize</manufacturer>
+			<codeMfg>MX-29</codeMfg>
+			<dullGrade>We have already seen that this</dullGrade>
+			<codeIADC>114</codeIADC>
+			<condFinalInner>1</condFinalInner>
+			<condFinalOuter>2</condFinalOuter>
+			<condFinalDull>OC</condFinalDull>
+			<condFinalLocation>123XYZ</condFinalLocation>
+			<condFinalBearing>F</condFinalBearing>
+			<condFinalGauge>I</condFinalGauge>
+			<condFinalOther>a value</condFinalOther>
+			<condFinalReason>DSF</condFinalReason>
+			<bitRun>
+				<eTimOpBit uom="h">12.03</eTimOpBit>
+				<mdHoleStart datum="KB" uom="m">1095</mdHoleStart>
+				<mdHoleStop datum="KB" uom="m">1554</mdHoleStop>
+				<ropAv uom="m/h">13.68</ropAv>
+				<mdHoleMadeRun datum="KB" uom="m">1301</mdHoleMadeRun>
+				<hrsDrilled uom="h">19.4</hrsDrilled>
+				<hrsDrilledRun uom="h">15.65</hrsDrilledRun>
+				<mdTotHoleMade datum="KB" uom="m">1178</mdTotHoleMade>
+				<totHrsDrilled uom="h">183</totHrsDrilled>
+				<totRop uom="m/h">18.16</totRop>
+			</bitRun>
+			<nozzle>
+				<numNozzle>1</numNozzle>
+				<diaNozzle uom="in/32">11</diaNozzle>
+			</nozzle>
+			<comment>A comment on the bit record</comment>
+		</bitRecord>
+		<bitRecord>
+			<numBitRun>1</numBitRun>
+			<numBit>1</numBit>
+			<diaBit uom="in">7.18</diaBit>
+			<manufacturer>Bit manufacturer It must be emphasize</manufacturer>
+			<codeMfg>MX-29</codeMfg>
+			<dullGrade>We have already seen that this</dullGrade>
+			<codeIADC>114</codeIADC>
+			<condFinalInner>1</condFinalInner>
+			<condFinalOuter>2</condFinalOuter>
+			<condFinalDull>OC</condFinalDull>
+			<condFinalLocation>123XYZ</condFinalLocation>
+			<condFinalBearing>F</condFinalBearing>
+			<condFinalGauge>I</condFinalGauge>
+			<condFinalOther>a value</condFinalOther>
+			<condFinalReason>WO</condFinalReason>
+			<bitRun>
+				<eTimOpBit uom="h">12.03</eTimOpBit>
+				<mdHoleStart datum="KB" uom="m">1095</mdHoleStart>
+				<mdHoleStop datum="KB" uom="m">1554</mdHoleStop>
+				<ropAv uom="m/h">13.68</ropAv>
+				<mdHoleMadeRun datum="KB" uom="m">1301</mdHoleMadeRun>
+				<hrsDrilled uom="h">19.4</hrsDrilled>
+				<hrsDrilledRun uom="h">15.65</hrsDrilledRun>
+				<mdTotHoleMade datum="KB" uom="m">1178</mdTotHoleMade>
+				<totHrsDrilled uom="h">183</totHrsDrilled>
+				<totRop uom="m/h">18.16</totRop>
+			</bitRun>
+			<nozzle>
+				<numNozzle>1</numNozzle>
+				<diaNozzle uom="in/32">11</diaNozzle>
+			</nozzle>
+			<comment>A comment on the bit record</comment>
+		</bitRecord>
+		<bitRecord>
+			<numBitRun>1</numBitRun>
+			<numBit>1</numBit>
+			<diaBit uom="in">6.86</diaBit>
+			<manufacturer>this is the manufacturer / supplier of the item.</manufacturer>
+			<codeMfg>MX-26</codeMfg>
+			<dullGrade>this is the dullGrade</dullGrade>
+			<codeIADC>112</codeIADC>
+			<condFinalInner>1</condFinalInner>
+			<condFinalOuter>2</condFinalOuter>
+			<condFinalDull>RO</condFinalDull>
+			<condFinalLocation>123XYZ</condFinalLocation>
+			<condFinalBearing>7</condFinalBearing>
+			<condFinalGauge>B</condFinalGauge>
+			<condFinalOther>a value</condFinalOther>
+			<condFinalReason>BHA</condFinalReason>
+			<bitRun>
+				<eTimOpBit uom="h">16.61</eTimOpBit>
+				<mdHoleStart datum="KB" uom="m">1176</mdHoleStart>
+				<mdHoleStop datum="KB" uom="m">1543</mdHoleStop>
+				<ropAv uom="m/h">14.86</ropAv>
+				<mdHoleMadeRun datum="KB" uom="m">1287</mdHoleMadeRun>
+				<hrsDrilled uom="h">19.87</hrsDrilled>
+				<hrsDrilledRun uom="h">14.22</hrsDrilledRun>
+				<mdTotHoleMade datum="KB" uom="m">1183</mdTotHoleMade>
+				<totHrsDrilled uom="h">124</totHrsDrilled>
+				<totRop uom="m/h">17.04</totRop>
+			</bitRun>
+			<nozzle>
+				<numNozzle>2</numNozzle>
+				<diaNozzle uom="in/32">12</diaNozzle>
+			</nozzle>
+			<comment>a comment on the bit record</comment>
+		</bitRecord>
+		<casing_liner_tubing>
+			<type>t</type>
+			<id uom="in">17.58</id>
+			<od uom="in">11.06</od>
+			<weight uom="lbm/ft">163</weight>
+			<grade>To characterize a li</grade>
+			<connection>However, this assump</connection>
+			<length uom="m">1009</length>
+			<mdTop datum="KB" uom="m">1068</mdTop>
+			<mdBottom datum="KB" uom="m">1058</mdBottom>
+			<casing_liner_tubing_run>
+				<casingType>Top</casingType>
+				<description>this is information about a casing_liner_tubing run.</description>
+				<dTimStart>2015-01-01T05:00:00.0Z</dTimStart>
+				<dTimEnd>2015-01-01T10:00:00.0Z</dTimEnd>
+			</casing_liner_tubing_run>
+			<comment>a comment on casing liner tubing</comment>
+		</casing_liner_tubing>
+		<casing_liner_tubing>
+			<type>l</type>
+			<id uom="in">15.48</id>
+			<od uom="in">11.16</od>
+			<weight uom="lbm/ft">114</weight>
+			<grade>ABCDEF123456</grade>
+			<connection>ABCDEF123456</connection>
+			<length uom="m">1069</length>
+			<mdTop datum="KB" uom="m">1030</mdTop>
+			<mdBottom datum="KB" uom="m">1068</mdBottom>
+			<casing_liner_tubing_run>
+				<casingType>Intermediate</casingType>
+				<description>this is information about a casing_liner_tubing run.</description>
+				<dTimStart>2015-01-01T08:00:00.0Z</dTimStart>
+				<dTimEnd>2015-01-01T10:00:00.0Z</dTimEnd>
+			</casing_liner_tubing_run>
+			<comment>a comment on casing liner tubing</comment>
+		</casing_liner_tubing>
+		<cementStage>
+			<dTimPumpStart>2015-01-01T02:00:00.0Z</dTimPumpStart>
+			<dTimPumpEnd>2015-01-01T12:00:00.0Z</dTimPumpEnd>
+			<jobType>squeeze</jobType>
+			<casingStrDia uom="in">13.02</casingStrDia>
+			<comments>this is a comment on cement stage</comments>
+			<volReturns uom="m3">1166</volReturns>
+			<cementingFluid>
+				<typeFluid>Wash</typeFluid>
+				<descFluid>Wash</descFluid>
+				<ratioMixWater uom="galUS/sack94">1198</ratioMixWater>
+				<density uom="sg">2.95</density>
+				<volPumped uom="m3">1103</volPumped>
+				<yp uom="ft3/sack94">1095</yp>
+				<eTimThickening uom="h">12</eTimThickening>
+				<pcFreeWater uom="%">12.6</pcFreeWater>
+				<comments>This is a comment on cementing fluid</comments>
+			</cementingFluid>
+			<cementingFluid>
+				<typeFluid>Wash</typeFluid>
+				<descFluid>Wash</descFluid>
+				<ratioMixWater uom="galUS/sack94">1089</ratioMixWater>
+				<density uom="sg">2.56</density>
+				<volPumped uom="m3">1058</volPumped>
+				<yp uom="ft3/sack94">1014</yp>
+				<eTimThickening uom="h">11</eTimThickening>
+				<pcFreeWater uom="%">14.43</pcFreeWater>
+				<comments>This is a comment on cementing fluid</comments>
+			</cementingFluid>
+			<dTimPresReleased>2015-01-01T08:00:00.0Z</dTimPresReleased>
+			<annFlowAfter>true</annFlowAfter>
+			<topPlug>true</topPlug>
+			<botPlug>false</botPlug>
+			<plugBumped>true</plugBumped>
+			<presBump uom="bar">1136</presBump>
+			<floatHeld>true</floatHeld>
+			<reciprocated>false</reciprocated>
+			<rotated>false</rotated>
+		</cementStage>
+		<cementStage>
+			<dTimPumpStart>2015-01-01T03:00:00.0Z</dTimPumpStart>
+			<dTimPumpEnd>2015-01-01T13:00:00.0Z</dTimPumpEnd>
+			<jobType>plug</jobType>
+			<casingStrDia uom="in">10.02</casingStrDia>
+			<comments>this is a comment on cement stage</comments>
+			<volReturns uom="m3">1095</volReturns>
+			<cementingFluid>
+				<typeFluid>Spacer</typeFluid>
+				<descFluid>Spacer</descFluid>
+				<ratioMixWater uom="galUS/sack94">1000</ratioMixWater>
+				<density uom="sg">2.65</density>
+				<volPumped uom="m3">1189</volPumped>
+				<yp uom="ft3/sack94">1167</yp>
+				<eTimThickening uom="h">14</eTimThickening>
+				<pcFreeWater uom="%">12.46</pcFreeWater>
+				<comments>this is a comment on cementing fluid</comments>
+			</cementingFluid>
+			<cementingFluid>
+				<typeFluid>Slurry</typeFluid>
+				<descFluid>Slurry</descFluid>
+				<ratioMixWater uom="galUS/sack94">1081</ratioMixWater>
+				<density uom="sg">2.2</density>
+				<volPumped uom="m3">1122</volPumped>
+				<yp uom="ft3/sack94">1179</yp>
+				<eTimThickening uom="h">14</eTimThickening>
+				<pcFreeWater uom="%">13.18</pcFreeWater>
+				<comments>this is a comment on cementing fluid</comments>
+			</cementingFluid>
+			<dTimPresReleased>2015-01-01T08:00:00.0Z</dTimPresReleased>
+			<annFlowAfter>true</annFlowAfter>
+			<topPlug>false</topPlug>
+			<botPlug>true</botPlug>
+			<plugBumped>false</plugBumped>
+			<presBump uom="bar">1162</presBump>
+			<floatHeld>true</floatHeld>
+			<reciprocated>false</reciprocated>
+			<rotated>true</rotated>
+		</cementStage>
+		<fluid>
+			<type>Oil Base</type>
+			<locationSample>Flowline</locationSample>
+			<dTim>2015-01-01T05:00:00.0Z</dTim>
+			<md datum="KB" uom="m">3437.1</md>
+			<tvd datum="KB" uom="m">3450.68</tvd>
+			<presBopRating uom="bar">632.72</presBopRating>
+			<mudClass>other</mudClass>
+			<density uom="g/cm3">1.48</density>
+			<visFunnel uom="s">51.0</visFunnel>
+			<pv uom="mPa.s">0.13</pv>
+			<yp uom="Pa">8.0</yp>
+			<filterCakeLtlp uom="mm">5.13</filterCakeLtlp>
+			<filtrateLtlp uom="cm3">11.0</filtrateLtlp>
+			<tempHthp uom="degC">50</tempHthp>
+			<filtrateHthp uom="cm3">13.0</filtrateHthp>
+			<filterCakeHthp uom="mm">56.0</filterCakeHthp>
+			<solidsPc uom="%">21.0</solidsPc>
+			<waterPc uom="%">22.0</waterPc>
+			<oilPc uom="%">23.0</oilPc>
+			<sandPc uom="%">24.0</sandPc>
+			<solidsLowGravPc uom="%">25.0</solidsLowGravPc>
+			<ph>9.0</ph>
+			<pm uom="cm3">0.2</pm>
+			<pmFiltrate uom="cm3">0.21</pmFiltrate>
+			<mf uom="cm3">1.5</mf>
+			<chloride uom="mg/L">50000</chloride>
+			<calcium uom="mg/L">1500</calcium>
+			<magnesium uom="mg/L">0.0</magnesium>
+			<rheometer>
+				<tempRheom uom="degC">50</tempRheom>
+				<presRheom uom="Pa">3.5</presRheom>
+				<vis3Rpm>3</vis3Rpm>
+				<vis6Rpm>6</vis6Rpm>
+				<vis30Rpm>30</vis30Rpm>
+				<vis60Rpm>60</vis60Rpm>
+				<vis100Rpm>100</vis100Rpm>
+				<vis200Rpm>200</vis200Rpm>
+				<vis300Rpm>300</vis300Rpm>
+				<vis600Rpm>600</vis600Rpm>
+			</rheometer>
+			<lime uom="kg/m3">0.001</lime>
+			<solidsHiGravPc uom="%">52.3</solidsHiGravPc>
+			<solCorPc uom="%">7.6</solCorPc>
+			<comments>a comment on fluids</comments>
+		</fluid>
+		<fluid>
+			<type>Mud Base</type>
+			<locationSample>Flowline</locationSample>
+			<dTim>2015-01-01T06:00:00.0Z</dTim>
+			<md datum="KB" uom="m">3142.84</md>
+			<tvd datum="KB" uom="m">3043.67</tvd>
+			<presBopRating uom="bar">689.51</presBopRating>
+			<mudClass>water based</mudClass>
+			<density uom="g/cm3">1.24</density>
+			<visFunnel uom="s">5.0</visFunnel>
+			<pv uom="mPa.s">0.74</pv>
+			<yp uom="Pa">7.98</yp>
+			<filterCakeLtlp uom="mm">5.0</filterCakeLtlp>
+			<filtrateLtlp uom="cm3">1.0</filtrateLtlp>
+			<tempHthp uom="degC">50</tempHthp>
+			<filtrateHthp uom="cm3">1.0</filtrateHthp>
+			<filterCakeHthp uom="mm">5.0</filterCakeHthp>
+			<solidsPc uom="%">20.0</solidsPc>
+			<waterPc uom="%">20.0</waterPc>
+			<oilPc uom="%">20.0</oilPc>
+			<sandPc uom="%">20.0</sandPc>
+			<solidsLowGravPc uom="%">20.0</solidsLowGravPc>
+			<ph>9.0</ph>
+			<pm uom="cm3">0.2</pm>
+			<pmFiltrate uom="cm3">0.2</pmFiltrate>
+			<mf uom="cm3">1.5</mf>
+			<chloride uom="mg/L">50000</chloride>
+			<calcium uom="mg/L">1500</calcium>
+			<magnesium uom="mg/L">0.0</magnesium>
+			<rheometer>
+				<tempRheom uom="degC">50</tempRheom>
+				<presRheom uom="Pa">3.5</presRheom>
+				<vis3Rpm>3</vis3Rpm>
+				<vis6Rpm>6</vis6Rpm>
+				<vis30Rpm>30</vis30Rpm>
+				<vis60Rpm>60</vis60Rpm>
+				<vis100Rpm>100</vis100Rpm>
+				<vis200Rpm>200</vis200Rpm>
+				<vis300Rpm>300</vis300Rpm>
+				<vis600Rpm>600</vis600Rpm>
+			</rheometer>
+			<lime uom="kg/m3">0.001</lime>
+			<solidsHiGravPc uom="%">5</solidsHiGravPc>
+			<solCorPc uom="%">5</solCorPc>
+			<comments>a comment on fluids</comments>
+		</fluid>
+		<porePressure>
+			<readingKind>estimated</readingKind>
+			<equivalentMudWeight uom="g/cm3">1.9</equivalentMudWeight>
+			<dTim>2015-01-01T04:00:00.0Z</dTim>
+			<md datum="KB" uom="m">3167.71</md>
+			<tvd datum="KB" uom="m">3037.68</tvd>
+			<comment>a comment on pore pressure</comment>
+		</porePressure>
+		<porePressure>
+			<readingKind>estimated</readingKind>
+			<equivalentMudWeight uom="g/cm3">1.9</equivalentMudWeight>
+			<dTim>2015-01-01T05:00:00.0Z</dTim>
+			<md datum="KB" uom="m">3189.2</md>
+			<tvd datum="KB" uom="m">3141.03</tvd>
+			<comment>a comment on pore pressure</comment>
+		</porePressure>
+		<extendedReport dTim="2015-01-01T04:00:00.0Z">A description of what happened from the end of report to an alternative time before the end of the next report. This is intended to allow a preliminary description of what happened from the end of the report (commonly midnight) until the time of submission of a preliminary report (commonly 6:00 in the morning).</extendedReport>
+		<surveyStation>
+			<dTim>2015-01-01T01:00:00.0Z</dTim>
+			<md datum="KB" uom="m">3050.71</md>
+			<tvd datum="KB" uom="m">3153.81</tvd>
+			<incl uom="dega">0.14</incl>
+			<azi uom="dega">75.78</azi>
+			<comment>a comment on survey station</comment>
+		</surveyStation>
+		<surveyStation>
+			<dTim>2015-01-01T02:00:00.0Z</dTim>
+			<md datum="KB" uom="m">3182.19</md>
+			<tvd datum="KB" uom="m">3030.49</tvd>
+			<incl uom="dega">0.93</incl>
+			<azi uom="dega">74.37</azi>
+			<comment>a comment on survey station</comment>
+		</surveyStation>
+		<surveyStation>
+			<dTim>2015-01-01T03:00:00.0Z</dTim>
+			<md datum="KB" uom="m">3189.05</md>
+			<tvd datum="KB" uom="m">3179.91</tvd>
+			<incl uom="dega">0.42</incl>
+			<azi uom="dega">77.27</azi>
+			<comment>a comment on survey station</comment>
+		</surveyStation>
+		<surveyStation>
+			<dTim>2015-01-01T04:00:00.0Z</dTim>
+			<md datum="KB" uom="m">3127.8</md>
+			<tvd datum="KB" uom="m">3020.9</tvd>
+			<incl uom="dega">0.3</incl>
+			<azi uom="dega">70.94</azi>
+			<comment>a comment on survey station</comment>
+		</surveyStation>
+		<surveyStation>
+			<dTim>2015-01-01T05:00:00.0Z</dTim>
+			<md datum="KB" uom="m">3018.97</md>
+			<tvd datum="KB" uom="m">3071.19</tvd>
+			<incl uom="dega">0.57</incl>
+			<azi uom="dega">76.39</azi>
+			<comment>a comment on survey station</comment>
+		</surveyStation>
+		<surveyStation>
+			<dTim>2015-01-01T06:00:00.0Z</dTim>
+			<md datum="KB" uom="m">3187.4</md>
+			<tvd datum="KB" uom="m">3173.44</tvd>
+			<incl uom="dega">0.83</incl>
+			<azi uom="dega">70.46</azi>
+			<comment>a comment on survey station</comment>
+		</surveyStation>
+		<activity>
+			<dTimStart>2015-01-01T02:00:00.0Z</dTimStart>
+			<dTimEnd>2015-01-01T04:00:00.0Z</dTimEnd>
+			<md datum="KB" uom="m">3191.15</md>
+			<tvd datum="KB" uom="m">0</tvd>
+			<phase>fixed</phase>
+			<proprietaryCode>drilling -- drive</proprietaryCode>
+			<conveyance>pumping</conveyance>
+			<mdHoleStart datum="71644de2-314c-11e1-9e64-5490384b2405" uom="m">3104.1</mdHoleStart>
+			<state>fail</state>
+			<stateDetailActivity>success</stateDetailActivity>
+			<comments>RIH from 4124ft to 10384ft</comments>
+		</activity>
+		<activity>
+			<dTimStart>2015-01-01T04:00:00.0Z</dTimStart>
+			<dTimEnd>2015-01-01T06:00:00.0Z</dTimEnd>
+			<md datum="KB" uom="m">3184.68</md>
+			<tvd datum="KB" uom="m">0</tvd>
+			<phase>bop test</phase>
+			<proprietaryCode>drilling -- trip</proprietaryCode>
+			<conveyance>flowing</conveyance>
+			<mdHoleStart datum="716474ef-314c-11e1-9756-5490384b2405" uom="m">3174.05</mdHoleStart>
+			<state>ok</state>
+			<stateDetailActivity>operation failed</stateDetailActivity>
+			<comments>RIH from 4124ft to 10384ft</comments>
+		</activity>
+		<activity>
+			<dTimStart>2015-01-01T06:00:00.0Z</dTimStart>
+			<dTimEnd>2015-01-01T08:00:00.0Z</dTimEnd>
+			<md datum="KB" uom="m">3037.88</md>
+			<tvd datum="KB" uom="m">0</tvd>
+			<phase>snub</phase>
+			<proprietaryCode>drilling -- casing</proprietaryCode>
+			<conveyance>drillpipe</conveyance>
+			<mdHoleStart datum="71649c01-314c-11e1-b48a-5490384b2405" uom="m">3158.97</mdHoleStart>
+			<state>ok</state>
+			<stateDetailActivity>stuck equipment</stateDetailActivity>
+			<comments>RIH from 4124ft to 10384ft</comments>
+		</activity>
+		<activity>
+			<dTimStart>2015-01-01T08:00:00.0Z</dTimStart>
+			<dTimEnd>2015-01-01T09:00:00.0Z</dTimEnd>
+			<md datum="KB" uom="m">3000.59</md>
+			<tvd datum="KB" uom="m">0</tvd>
+			<phase>fixed</phase>
+			<proprietaryCode>drilling -- drill</proprietaryCode>
+			<conveyance>coiledTubing</conveyance>
+			<mdHoleStart datum="7164c310-314c-11e1-a7e8-5490384b2405" uom="m">3096.1</mdHoleStart>
+			<state>ok</state>
+			<stateDetailActivity>kick</stateDetailActivity>
+			<comments>RIH from 4124ft to 10384ft</comments>
+		</activity>
+		<activity>
+			<dTimStart>2015-01-01T10:00:00.0Z</dTimStart>
+			<dTimEnd>2015-01-01T16:00:00.0Z</dTimEnd>
+			<md datum="KB" uom="m">3096.18</md>
+			<tvd datum="KB" uom="m">0</tvd>
+			<phase>bop test</phase>
+			<proprietaryCode>drilling -- drive</proprietaryCode>
+			<conveyance>casing</conveyance>
+			<mdHoleStart datum="7164ea1f-314c-11e1-bb6d-5490384b2405" uom="m">3114.94</mdHoleStart>
+			<state>fail</state>
+			<stateDetailActivity>stuck equipment</stateDetailActivity>
+			<comments>RIH from 4124ft to 10384f</comments>
+		</activity>
+		<logInfo>
+			<dTim>2015-01-01T01:00:00.0Z</dTim>
+			<runNumber>1</runNumber>
+			<serviceCompany>Baker Atlas</serviceCompany>
+			<service>EWL</service>
+			<mdTop datum="KB" uom="m">2281.59</mdTop>
+			<mdBottom datum="KB" uom="m">2148.07</mdBottom>
+			<tvdTop datum="KB" uom="m">1189</tvdTop>
+			<tvdBottom datum="KBx" uom="m">1187</tvdBottom>
+			<tool>Electrical</tool>
+			<tempBHST uom="degC">119.68</tempBHST>
+			<eTimStatic uom="h">19.69</eTimStatic>
+			<mdTempTool uom="m">4239.91</mdTempTool>
+			<tvdTempTool datum="KB" uom="m">1153</tvdTempTool>
+			<comment>a comment on log info</comment>
+		</logInfo>
+		<logInfo>
+			<dTim>2015-01-01T04:00:00.0Z</dTim>
+			<runNumber>2</runNumber>
+			<serviceCompany>Seadrill</serviceCompany>
+			<service>EWL</service>
+			<mdTop datum="KB" uom="m">2161.34</mdTop>
+			<mdBottom datum="KB" uom="m">2415.96</mdBottom>
+			<tvdTop datum="KB" uom="m">1149</tvdTop>
+			<tvdBottom datum="KBx" uom="m">1164</tvdBottom>
+			<tool>Acoustic</tool>
+			<tempBHST uom="degC">119.3</tempBHST>
+			<eTimStatic uom="h">16.18</eTimStatic>
+			<mdTempTool uom="m">4443.12</mdTempTool>
+			<tvdTempTool datum="KB" uom="m">1151</tvdTempTool>
+			<comment>a comment on log info</comment>
+		</logInfo>
+		<logInfo>
+			<dTim>2015-01-01T06:00:00.0Z</dTim>
+			<runNumber>1</runNumber>
+			<serviceCompany>Aker Drilling</serviceCompany>
+			<service>EWL</service>
+			<mdTop datum="KB" uom="m">2340.59</mdTop>
+			<mdBottom datum="KB" uom="m">2233.16</mdBottom>
+			<tvdTop datum="KB" uom="m">1150</tvdTop>
+			<tvdBottom datum="KBx" uom="m">1181</tvdBottom>
+			<tool>Gamma</tool>
+			<tempBHST uom="degC">111.47</tempBHST>
+			<eTimStatic uom="h">18.8</eTimStatic>
+			<mdTempTool uom="m">4285.43</mdTempTool>
+			<tvdTempTool datum="KB" uom="m">1100</tvdTempTool>
+			<comment>a comment on log info</comment>
+		</logInfo>
+		<coreInfo>
+			<dTim>2015-01-01T09:00:00.0Z</dTim>
+			<coreNumber>1</coreNumber>
+			<mdTop datum="KB" uom="m">1502</mdTop>
+			<mdBottom datum="KB" uom="m">1704.17</mdBottom>
+			<tvdTop datum="KB" uom="m">1400.97</tvdTop>
+			<tvdBottom datum="KB" uom="m">1764.13</tvdBottom>
+			<lenRecovered uom="m">282.06</lenRecovered>
+			<recoverPc uom="%">93.63</recoverPc>
+			<lenBarrel uom="m">203</lenBarrel>
+			<innerBarrelType>aluminum</innerBarrelType>
+			<coreDescription>testing core no 1</coreDescription>
+		</coreInfo>
+		<coreInfo>
+			<dTim>2015-01-01T10:00:00.0Z</dTim>
+			<coreNumber>3</coreNumber>
+			<mdTop datum="KB" uom="m">1531</mdTop>
+			<mdBottom datum="KB" uom="m">1714.39</mdBottom>
+			<tvdTop datum="KB" uom="m">1438.83</tvdTop>
+			<tvdBottom datum="KB" uom="m">1781.89</tvdBottom>
+			<lenRecovered uom="m">293.42</lenRecovered>
+			<recoverPc uom="%">91.61</recoverPc>
+			<lenBarrel uom="m">214</lenBarrel>
+			<innerBarrelType>fiberglass</innerBarrelType>
+			<coreDescription>testing core no 1</coreDescription>
+		</coreInfo>
+		<coreInfo>
+			<dTim>2015-01-01T14:00:00.0Z</dTim>
+			<coreNumber>3</coreNumber>
+			<mdTop datum="KB" uom="m">1559</mdTop>
+			<mdBottom datum="KB" uom="m">1559.46</mdBottom>
+			<tvdTop datum="KB" uom="m">1495.27</tvdTop>
+			<tvdBottom datum="KB" uom="m">1725.2</tvdBottom>
+			<lenRecovered uom="m">273.67</lenRecovered>
+			<recoverPc uom="%">96.87</recoverPc>
+			<lenBarrel uom="m">224</lenBarrel>
+			<innerBarrelType>fiberglass</innerBarrelType>
+			<coreDescription>testing core no 1 </coreDescription>
+		</coreInfo>
+		<wellTestInfo>
+			<dTim>2015-01-01T01:00:00.0Z</dTim>
+			<testType>drill stem test</testType>
+			<testNumber>2</testNumber>
+			<mdTop datum="KB" uom="m">1709.82</mdTop>
+			<mdBottom datum="KB" uom="m">1841.53</mdBottom>
+			<tvdTop datum="KB" uom="m">1735.74</tvdTop>
+			<tvdBottom datum="KB" uom="m">1847.53</tvdBottom>
+			<chokeOrificeSize uom="mm">324.69</chokeOrificeSize>
+			<densityOil uom="g/cm3">0.7</densityOil>
+			<densityWater uom="g/cm3">1.1</densityWater>
+			<densityGas uom="g/cm3">0.74</densityGas>
+			<flowRateOil uom="m3/d">8.62</flowRateOil>
+			<flowRateWater uom="m3/d">7.07</flowRateWater>
+			<flowRateGas uom="M(m3)/d">139.35</flowRateGas>
+			<presShutIn uom="MPa">3</presShutIn>
+			<presFlowing uom="MPa">38.63</presFlowing>
+			<presBottom uom="MPa">37.69</presBottom>
+			<gasOilRatio uom="m3/m3">12</gasOilRatio>
+			<waterOilRatio uom="m3/m3">21</waterOilRatio>
+			<chloride uom="ppm">4</chloride>
+			<carbonDioxide uom="ppm">8</carbonDioxide>
+			<hydrogenSulfide uom="ppm">4</hydrogenSulfide>
+			<volOilTotal uom="m3">7.33</volOilTotal>
+			<volGasTotal uom="M(m3)">95.83</volGasTotal>
+			<volWaterTotal uom="m3">7.75</volWaterTotal>
+			<volOilStored uom="m3">36.32</volOilStored>
+			<comment>a comment on well test info</comment>
+		</wellTestInfo>
+		<wellTestInfo>
+			<dTim>2015-01-01T04:00:00.0Z</dTim>
+			<testType>production test</testType>
+			<testNumber>1</testNumber>
+			<mdTop datum="KB" uom="m">1742.31</mdTop>
+			<mdBottom datum="KB" uom="m">1783.16</mdBottom>
+			<tvdTop datum="KB" uom="m">1793.38</tvdTop>
+			<tvdBottom datum="KB" uom="m">1799.03</tvdBottom>
+			<chokeOrificeSize uom="mm">325.38</chokeOrificeSize>
+			<densityOil uom="g/cm3">0.1</densityOil>
+			<densityWater uom="g/cm3">1.1</densityWater>
+			<densityGas uom="g/cm3">0.24</densityGas>
+			<flowRateOil uom="m3/d">8.31</flowRateOil>
+			<flowRateWater uom="m3/d">8.47</flowRateWater>
+			<flowRateGas uom="M(m3)/d">131.45</flowRateGas>
+			<presShutIn uom="MPa">1</presShutIn>
+			<presFlowing uom="MPa">34.88</presFlowing>
+			<presBottom uom="MPa">35.49</presBottom>
+			<gasOilRatio uom="m3/m3">14</gasOilRatio>
+			<waterOilRatio uom="m3/m3">20</waterOilRatio>
+			<chloride uom="ppm">7</chloride>
+			<carbonDioxide uom="ppm">7</carbonDioxide>
+			<hydrogenSulfide uom="ppm">4</hydrogenSulfide>
+			<volOilTotal uom="m3">9.08</volOilTotal>
+			<volGasTotal uom="M(m3)">98.64</volGasTotal>
+			<volWaterTotal uom="m3">8.49</volWaterTotal>
+			<volOilStored uom="m3">35.72</volOilStored>
+			<comment>a comment on well test info</comment>
+		</wellTestInfo>
+		<formTestInfo>
+			<dTim>2015-01-01T03:00:00.0Z</dTim>
+			<runNumber>1</runNumber>
+			<testNumber>1</testNumber>
+			<md datum="KB" uom="m">1518</md>
+			<tvd datum="KB" uom="m">1405.57</tvd>
+			<presPore uom="MPa">16.22</presPore>
+			<fluidDensity uom="g/cm3">1.00</fluidDensity>
+			<hydrostaticPresBefore uom="MPa">122</hydrostaticPresBefore>
+			<leakOffPressure uom="MPa">12</leakOffPressure>
+			<goodSeal>true</goodSeal>
+			<mdSample uom="m">1514</mdSample>
+			<dominateComponent>oil</dominateComponent>
+			<densityHC uom="g/cm3">1.4</densityHC>
+			<volumeSample uom="dm3">21204.44</volumeSample>
+			<description>Testing of the Formation Test Information to ERH</description>
+		</formTestInfo>
+		<formTestInfo>
+			<dTim>2015-01-01T04:00:00.0Z</dTim>
+			<runNumber>2</runNumber>
+			<testNumber>2</testNumber>
+			<md datum="KB" uom="m">1504</md>
+			<tvd datum="KB" uom="m">1480.27</tvd>
+			<presPore uom="MPa">16.71</presPore>
+			<fluidDensity uom="g/cm3">1.00</fluidDensity>
+			<hydrostaticPresBefore uom="MPa">122</hydrostaticPresBefore>
+			<leakOffPressure uom="MPa">12</leakOffPressure>
+			<goodSeal>true</goodSeal>
+			<mdSample uom="m">1535</mdSample>
+			<dominateComponent>gas</dominateComponent>
+			<densityHC uom="g/cm3">1.53</densityHC>
+			<volumeSample uom="dm3">11289.79</volumeSample>
+			<description>Testing of the Formation Test Information to ERH</description>
+		</formTestInfo>
+		<lithShowInfo>
+			<dTim>2015-01-01T04:00:00.0Z</dTim>
+			<mdTop datum="KB" uom="m">1511</mdTop>
+			<mdBottom datum="KB" uom="m">1908.99</mdBottom>
+			<tvdTop datum="KB" uom="m">1421.74</tvdTop>
+			<tvdBottom datum="KB" uom="m">1814.91</tvdBottom>
+			<show>A textual description of any shows in the interval.</show>
+			<lithology>A description that gives a geological/lithological description/evaluation of the interval</lithology>
+		</lithShowInfo>
+		<lithShowInfo>
+			<dTim>2015-01-01T05:00:00.0Z</dTim>
+			<mdTop datum="KB" uom="m">1503</mdTop>
+			<mdBottom datum="KB" uom="m">1923.73</mdBottom>
+			<tvdTop datum="KB" uom="m">1415.82</tvdTop>
+			<tvdBottom datum="KB" uom="m">1859.49</tvdBottom>
+			<show>A textual description of any shows in the interval.</show>
+			<lithology>A description that gives a geological/lithological description/evaluation of the interval</lithology>
+		</lithShowInfo>
+		<equipFailureInfo>
+			<dTim>2015-01-01T08:00:00.0Z</dTim>
+			<md datum="KB" uom="m">2529.27</md>
+			<tvd datum="KB" uom="m">1168</tvd>
+			<equipClass>hoisting equ -- travelling block</equipClass>
+			<eTimMissProduction uom="min">79</eTimMissProduction>
+			<dTimRepair>2015-01-01T10:00:00.0Z</dTimRepair>
+			<description>Leak when attempting to leak test to 5000 psi. Repair same. It may be, then, that the fundamental error of regarding functional notions as categorial suffices t</description>
+		</equipFailureInfo>
+		<equipFailureInfo>
+			<dTim>2015-01-01T09:00:00.0Z</dTim>
+			<md datum="KB" uom="m">2530.87</md>
+			<tvd datum="KB" uom="m">1162</tvd>
+			<equipClass>hoisting equ -- travelling block</equipClass>
+			<eTimMissProduction uom="min">73</eTimMissProduction>
+			<dTimRepair>2015-01-01T10:00:00.0Z</dTimRepair>
+			<description>Leak when attempting to leak test to 5000 psi. Repair same. We have already seen that a case of semigrammaticalness of a different sort appears to correlate rat</description>
+		</equipFailureInfo>
+		<controlIncidentInfo>
+			<dTim>2015-01-01T10:00:00.0Z</dTim>
+			<mdInflow datum="KB" uom="m">3245.21</mdInflow>
+			<tvdInflow datum="KB" uom="m">3147.43</tvdInflow>
+			<phase>snub</phase>
+			<proprietaryCode>drilling -- drill</proprietaryCode>
+			<eTimLost uom="min">492.92</eTimLost>
+			<dTimRegained>2015-01-01T11:00:00.0Z</dTimRegained>
+			<diaBit uom="in">8.6</diaBit>
+			<mdBit uom="m">3212.79</mdBit>
+			<wtMud uom="g/cm3">1.41</wtMud>
+			<porePressure uom="g/cm3">1.31</porePressure>
+			<diaCsgLast uom="in">7</diaCsgLast>
+			<mdCsgLast datum="KB" uom="m">3228.55</mdCsgLast>
+			<volMudGained uom="m3">1.05</volMudGained>
+			<presShutInCasing uom="bar">80.65</presShutInCasing>
+			<presShutInDrill uom="bar">86.4</presShutInDrill>
+			<incidentType>shallow gas kick</incidentType>
+			<killingType>drillers method</killingType>
+			<formation>We will bring evidence in favor of the f</formation>
+			<tempBottom uom="degC">116.54</tempBottom>
+			<presMaxChoke uom="bar">80.93</presMaxChoke>
+			<description>Drilled out 7 3/4" It appears that the fundamental error of regarding functional notions as categorial is, apparently, determined by problems of phonemic and morphological analysis.</description>
+		</controlIncidentInfo>
+		<controlIncidentInfo>
+			<dTim>2015-01-01T11:00:00.0Z</dTim>
+			<mdInflow datum="KB" uom="m">3230.01</mdInflow>
+			<tvdInflow datum="KB" uom="m">3046.6</tvdInflow>
+			<phase>wire line</phase>
+			<proprietaryCode>drilling -- underream</proprietaryCode>
+			<eTimLost uom="min">496.78</eTimLost>
+			<dTimRegained>2015-01-01T11:00:00.0Z</dTimRegained>
+			<diaBit uom="in">7.17</diaBit>
+			<mdBit uom="m">3237.1</mdBit>
+			<wtMud uom="g/cm3">1.38</wtMud>
+			<porePressure uom="g/cm3">1.74</porePressure>
+			<diaCsgLast uom="in">6</diaCsgLast>
+			<mdCsgLast datum="KB" uom="m">3240.24</mdCsgLast>
+			<volMudGained uom="m3">1.12</volMudGained>
+			<presShutInCasing uom="bar">84.54</presShutInCasing>
+			<presShutInDrill uom="bar">84.64</presShutInDrill>
+			<incidentType>gas kick</incidentType>
+			<killingType>lubricate and bleed</killingType>
+			<formation>Clearly, the earlier discussion of devia</formation>
+			<tempBottom uom="degC">138.34</tempBottom>
+			<presMaxChoke uom="bar">80.62</presMaxChoke>
+			<description>Drilled out 7 3/4" Suppose, for instance, that the theory of syntactic features developed earlier delimits problems of phonemic and morphological analysis.</description>
+		</controlIncidentInfo>
+		<stratInfo>
+			<dTim>2015-01-01T14:00:00.0Z</dTim>
+			<mdTopPlanned uom="m">1001</mdTopPlanned>
+			<tvdTopPlanned uom="m">1002</tvdTopPlanned>
+			<mdTop datum="KB" uom="m">3274.33</mdTop>
+			<tvdTop datum="KB" uom="m">3114.75</tvdTop>
+			<description>Preliminary stratigraphy test Presumably, the natural general principle that will subsume this case is, appare</description>
+		</stratInfo>
+		<stratInfo>
+			<dTim>2015-01-01T15:00:00.0Z</dTim>
+			<mdTopPlanned uom="m">2002</mdTopPlanned>
+			<tvdTopPlanned uom="m">2003</tvdTopPlanned>
+			<mdTop datum="KB" uom="m">3243.93</mdTop>
+			<tvdTop datum="KB" uom="m">3135.98</tvdTop>
+			<description>Preliminary stratigraphy test Conversely, the fundamental error of regarding functional notions as categorial </description>
+		</stratInfo>
+		<perfInfo>
+			<dTimOpen>2015-01-01T10:00:00.0Z</dTimOpen>
+			<dTimClose>2015-01-01T14:00:00.0Z</dTimClose>
+			<mdTop datum="KB" uom="m">3383.38</mdTop>
+			<mdBottom datum="KB" uom="m">3374.05</mdBottom>
+			<tvdTop uom="m">3264.41</tvdTop>
+			<tvdBottom uom="m">3226.37</tvdBottom>
+		</perfInfo>
+		<perfInfo>
+			<dTimOpen>2015-01-01T14:00:00.0Z</dTimOpen>
+			<dTimClose>2015-01-01T19:00:00.0Z</dTimClose>
+			<mdTop datum="KB" uom="m">3341.46</mdTop>
+			<mdBottom datum="KB" uom="m">3306.01</mdBottom>
+			<tvdTop uom="m">3204.23</tvdTop>
+			<tvdBottom uom="m">3294.03</tvdBottom>
+		</perfInfo>
+		<gasReadingInfo>
+			<dTim>2015-01-01T03:00:00.0Z</dTim>
+			<readingType>drilling gas peak</readingType>
+			<mdTop datum="KB" uom="m">1419</mdTop>
+			<mdBottom datum="KB" uom="m">1834.55</mdBottom>
+			<tvdTop datum="KB" uom="m">1419.77</tvdTop>
+			<tvdBottom datum="KB" uom="m">1870.36</tvdBottom>
+			<gasHigh uom="%">73</gasHigh>
+			<gasLow uom="%">30</gasLow>
+			<meth uom="ppm">7</meth>
+			<eth uom="ppm">9</eth>
+			<prop uom="ppm">7</prop>
+			<ibut uom="ppm">5</ibut>
+			<nbut uom="ppm">5</nbut>
+			<ipent uom="ppm">9</ipent>
+			<npent uom="ppm">8</npent>
+			<comment>this is a comment on gas reading info</comment>
+		</gasReadingInfo>
+		<gasReadingInfo>
+			<dTim>2015-01-01T04:00:00.0Z</dTim>
+			<readingType>drilling background gas</readingType>
+			<mdTop datum="KB" uom="m">1473</mdTop>
+			<mdBottom datum="KB" uom="m">1819.95</mdBottom>
+			<tvdTop datum="KB" uom="m">1448.83</tvdTop>
+			<tvdBottom datum="KB" uom="m">1847.55</tvdBottom>
+			<gasHigh uom="%">75</gasHigh>
+			<gasLow uom="%">36</gasLow>
+			<meth uom="ppm">9</meth>
+			<eth uom="ppm">7</eth>
+			<prop uom="ppm">5</prop>
+			<ibut uom="ppm">8</ibut>
+			<nbut uom="ppm">9</nbut>
+			<ipent uom="ppm">9</ipent>
+			<npent uom="ppm">8</npent>
+			<comment>this is a comment on gas reading info</comment>
+		</gasReadingInfo>
+		<weather>
+			<dTim>2015-01-01T04:00:00.0Z</dTim>
+			<agency>weather agency</agency>
+			<barometricPressure uom="Pa">78.5</barometricPressure>
+			<beaufortScaleNumber>9</beaufortScaleNumber>
+			<tempSurfaceMn uom="degC">16</tempSurfaceMn>
+			<tempSurfaceMx uom="degC">14</tempSurfaceMx>
+			<tempWindChill uom="degC">19</tempWindChill>
+			<tempsea uom="degC">19</tempsea>
+			<visibility uom="m">522</visibility>
+			<aziWave uom="dega">31.1</aziWave>
+			<htWave uom="m">9</htWave>
+			<significantWave uom="m">8</significantWave>
+			<maxWave uom="m">5</maxWave>
+			<periodWave uom="s">3</periodWave>
+			<aziWind uom="dega">31.1</aziWind>
+			<velWind uom="m/s">4</velWind>
+			<typePrecip>rain</typePrecip>
+			<amtPrecip uom="m">5</amtPrecip>
+			<coverCloud>203</coverCloud>
+			<ceilingCloud uom="m">197</ceilingCloud>
+			<currentSea uom="m/s">3</currentSea>
+			<aziCurrentSea uom="dega">31.1</aziCurrentSea>
+			<comments>this is a comment about weather</comments>
+		</weather>
+		<comment>this is a general drillreport comment</comment>
+	</drillReport>
+</drillReports>
