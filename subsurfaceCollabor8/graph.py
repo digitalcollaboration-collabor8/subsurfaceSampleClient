@@ -1,6 +1,8 @@
 import requests
 import os
-
+import json
+import pandas as pd
+from pandas.io.json import json_normalize
 
 class Graph:
     def __init__(self,token:str,
@@ -42,4 +44,14 @@ class Graph:
         except Exception as err:
             raise Exception('Failed in graphql query:'+str(err)+",response:"+str(response.json()))
 
-    
+    def query_to_file(self,query:str,file_path:str):
+        """
+        Runs a graphql query and saves the result to the given file
+
+        """
+        try:
+            response=self.query(query)
+            with open(file_path, "w") as outfile: 
+                outfile.write(json.dumps(response)) 
+        except Exception as err:
+            raise Exception('Failed in processing query to file:'+str(err)+",response:"+str(response.json()))
