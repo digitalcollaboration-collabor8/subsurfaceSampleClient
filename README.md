@@ -147,7 +147,7 @@ def run_sample_query(self):
             self.fail("Query failed with error:"+str(err))
 ```
 
-#### Query the system for drilling activities, converting it to a panda datafram and then write result to Excel
+#### Query the system for drilling activities, converting it to a panda normalized dataframe and then write result to Excel
 
 ```python
  from subsurfaceCollabor8 import queries
