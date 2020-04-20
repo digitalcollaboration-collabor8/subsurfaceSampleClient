@@ -19,11 +19,16 @@ class Reports:
     token:str,subscriptionKey="",validateUrl="",submitUrl=""):
         """
         Inits the reports class with the specified report type,
+        
+        Parameters
+        ----------
+
         fileName path to the file to send,
         token from authentication,
         subscriptionKey needed for API, if this is not specified tries to load it from environment variable
         validateUrl to use for validation, if this is not specified the code tries to read it from the environment variables
         submitUrl to use for submittal, if this is not specified the code tries to read it from the environment variables
+        
         """
         super().__init__()
         self.reportType=reportType

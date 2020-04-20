@@ -9,6 +9,10 @@ class Graph:
     subscriptionKey="",graphUrl=""):
         """
         Inits the graph class given the specified parameters
+
+        Parameters
+        ----------
+
         token - OAUTH2 token to use
         subscriptionKey - the API subscription key, if not specified tries to load it from environment variables
         graphUrl - the url to the GraphQL endpoint, if not specified tries to load it from environment variables

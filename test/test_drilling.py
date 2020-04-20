@@ -112,7 +112,48 @@ class Test_Drilling(unittest.TestCase):
             print ("Excel result written to:"+result_file)
         except Exception as err:
             self.fail("Query drilling status info failed with error:"+str(err))
-
+    
+    def test_lithology(self):
+        entity="2/4-X-4 A"
+        query=queries.get_drilling_lithology_description(entity)
+        try:
+            query_obj=graph.Graph(self.token)
+            result=query_obj.query(query)
+            #have the dict send it to a panda frame creation
+            drilling_frames.lithology_info_to_frame(result)
+        except Exception as err:
+            self.fail("Query drilling lithology failed with error:"+str(err)) 
+    
+    def test_lithology_to_csv(self):
+        entity="2/4-X-4 A"
+        query=queries.get_drilling_lithology_description(entity)
+        result_file = os.path.join(os.path.dirname(__file__)+"/data/", 'drilling_lithology_result.xlsx')
+        try:
+            query_obj=graph.Graph(self.token)
+            result=query_obj.query(query)
+            #have the dict send it to a panda frame creation
+            normalized_frame=drilling_frames.lithology_info_to_frame(result)
+            #write the data to a csv file
+            frame_utils.frame_to_excel(normalized_frame,result_file)
+            print ("Excel result written to:"+result_file)
+        except Exception as err:
+            self.fail("Query drilling lithology failed with error:"+str(err)) 
+    
+    def test_lithology_to_excel(self):
+        entity="2/4-X-4 A"
+        query=queries.get_drilling_lithology_description(entity)
+        result_file = os.path.join(os.path.dirname(__file__)+"/data/", 'drilling_lithology_result.csv')
+        try:
+            query_obj=graph.Graph(self.token)
+            result=query_obj.query(query)
+            #have the dict send it to a panda frame creation
+            normalized_frame=drilling_frames.lithology_info_to_frame(result)
+            #write the data to a csv file
+            frame_utils.frame_to_csv(normalized_frame,result_file)
+            print ("CSV result written to:"+result_file)
+        except Exception as err:
+            self.fail("Query drilling lithology failed with error:"+str(err)) 
+    
 
 if __name__ == "__main__":
     unittest.main()

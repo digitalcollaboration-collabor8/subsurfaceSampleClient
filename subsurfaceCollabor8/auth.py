@@ -36,9 +36,7 @@ class AuthInfo:
         or self.subscriptionKey==None:
           raise Exception('Seems like not all required environment varible are set...')
 
-class AuthInfoEncoder(json.JSONEncoder):
-        def default(self, o):
-            return o.__dict__
+
 
 class Authenticate:
     def __init__(self,authInfo:AuthInfo):
@@ -48,6 +46,7 @@ class Authenticate:
     def authenticate(self):
         """
         Function tries to authenticate against Azure and returns a token if succesful otherwise exception
+        
         Class needs to be initiated with an AuthInfo object
         """
         authData={
