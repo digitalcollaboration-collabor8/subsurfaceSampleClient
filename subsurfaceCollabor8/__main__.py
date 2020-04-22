@@ -2,6 +2,7 @@ import click
 import logging
 from subsurfaceCollabor8 import auth
 from subsurfaceCollabor8 import drilling as subsurfaceDrilling
+from subsurfaceCollabor8 import production as subsurfaceProduction
 from subsurfaceCollabor8 import common_utils
 @click.group()
 def messages():
@@ -70,6 +71,72 @@ def drilling(datatype,format,start,end,wellbore,output,log):
         logging.error("Failed in processing of drilling data:%s",str(err))
     logging.info("Data written to:%s",output)
 
+
+@click.command(name='production',help='Command to specify if production data should be extracted')
+@click.option('--datatype',
+              type=click.Choice(['Production',
+               'Injection',
+               'Consumption',
+               'Import',
+               'Export',
+               'Inventory',
+               'InstallationData'], 
+              case_sensitive=True),
+              help='The type of production data to query for, e.g. to get export volumes user "export" to get consumption (fuel/flare++) use "Consumption"',
+              required=True)
+@click.option('--format',
+              type=click.Choice(['json', 'csv','excel'], 
+              case_sensitive=True),
+              help='The type of format to extract the data to',
+              required=True)
+@click.option('--start',
+              help='The start time to use in the form of e.g. UTC time or a date such as e.g. 2020-01-21T23:00:00.000Z',
+              required=False)
+@click.option('--end',
+              help='The end time to use in the form of e.g. UTC time or a date such as e.g. 2020-01-21T23:00:00.000Z',
+              required=False)
+@click.option('--asset',
+              help='The name of the asset to query for data e.g. GINA KROG',
+              required=True)
+@click.option('--output',
+              help='The full path to the file where to store results',
+              required=True)
+@click.option('--log',
+              help='The full path to the logfile where to write log information',
+              required=True)
+def production(datatype,format,start,end,asset,output,log):
+    __initialize_logging(log)
+    logging.info("Extracting data for - dataType:%s, format:%s, start:%s, end:%s, asset:%s, output:%s",
+    datatype,format,start,end,asset,output)
+
+    #get the token first
+    authInfo=auth.AuthInfo()
+    authInfo.init_from_env_vars()
+    try:
+        #create the filepath if not existing
+        common_utils.create_filepath_if_not_exists(output)
+        authObj=auth.Authenticate(authInfo) 
+        token=authObj.authenticate()
+        pObj=subsurfaceProduction.ProductionData(token)
+        #map the datatype
+        type_enum=pObj.map_str_prod_datatype_to_enum(datatype)
+        #need to handle the format
+        if format=='json':
+            #handle json
+            pObj.get_json_data_to_file(output,start,end,asset,type_enum)
+
+        elif format=='csv':
+            #handle csv
+            pObj.get_csv_data(output,start,end,asset,type_enum)
+        elif format=='excel':
+            #handle excel
+            pObj.get_excel_data(output,start,end,asset,type_enum)
+        else:
+            logging.info("Unknown format...")
+    except Exception as err:
+        logging.error("Failed in processing of production data:%s",str(err))
+    logging.info("Data written to:%s",output)
+
 def __initialize_logging(log_file):
     #make sure that the path to the logfile exists
     common_utils.create_filepath_if_not_exists(log_file)
@@ -92,6 +159,7 @@ def help(ctx):
 
 
 messages.add_command(drilling)
+messages.add_command(production)
 messages.add_command(help)
 
 if __name__ == '__main__':

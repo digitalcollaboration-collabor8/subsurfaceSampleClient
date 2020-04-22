@@ -273,6 +273,7 @@ def get_production_volumes(period_start,period_end,entity_name,volume_type):
       entity_names: ["$name"]
       limit: 1000
     ) {
+      sourceSystemReportName
       sourceStartTime
       sourceEndTime
       dataStartTime
@@ -350,6 +351,7 @@ def get_production_volumes_regex(period_start,period_end,entity_name,volume_type
       entity_names_rx: ["/^$name.*/i"]
       limit: 1000
     ) {
+      sourceSystemReportName
       sourceStartTime
       sourceEndTime
       dataStartTime

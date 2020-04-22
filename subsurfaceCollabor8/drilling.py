@@ -113,7 +113,7 @@ class DrillingData:
         else:
             raise Exception("Unknown data type specified")
     
-
+ 
     def map_str_activity_to_enum(self,data_type):
         
         if data_type==DrillingDataType.ACTIVITIES.value:
