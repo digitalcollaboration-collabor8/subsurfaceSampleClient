@@ -11,6 +11,4 @@ The following repository contains an example python client that can be used to i
 * Requies the openpyxl to use excel functions from pandas, to install pip3 install openpyxl
 
 
-* Please refer to the Wiki for more information and how to use this library *
-
-[Documentation and wiki](https://github.com/digitalcollaboration-collabor8/subsurfaceSampleClient/wiki)
+**Please refer to the Wiki for more information and how to use this library** - [Documentation and wiki](https://github.com/digitalcollaboration-collabor8/subsurfaceSampleClient/wiki)
