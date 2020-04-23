@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="subsurfaceCollabor8", 
-    version="0.5",
+    version="0.6",
     author="Subsurface Collabor8 community",
     author_email="ep-domain@norog.no",
     license='Apache License 2.0',
@@ -13,7 +13,7 @@ setuptools.setup(
     url="https://github.com/digitalcollaboration-collabor8/subsurfaceSampleClient",
     packages=setuptools.find_packages(),
     install_requires=[
-        'pandas>=1.03',
+        'pandas>=1.0.3',
         'requests>=2.23.0',
         'openpyxl>=3.0.0',
         'click>=7.1.1'
