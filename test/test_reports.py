@@ -12,10 +12,10 @@ class Test_TestReports(unittest.TestCase):
             authInfo.init_from_env_vars()
             authObj=auth.Authenticate(authInfo) 
             token=authObj.authenticate()
-            report=reports.Reports(reports.ReportType.DDRML,
-            ddrmlFile,
+            report=reports.Reports(
             token)
-            result=report.validate()
+            result=report.validate(reports.ReportType.DDRML,
+            ddrmlFile)
         except Exception as err:
             self.fail("Failed with error:"+str(err)) 
              
@@ -26,10 +26,10 @@ class Test_TestReports(unittest.TestCase):
             authInfo.init_from_env_vars()
             authObj=auth.Authenticate(authInfo) 
             token=authObj.authenticate()
-            report=reports.Reports(reports.ReportType.DDRML,
-            ddrmlFile,
+            report=reports.Reports(
             token)
-            result=report.publish()
+            result=report.publish(reports.ReportType.DDRML,
+            ddrmlFile)
         except Exception as err:
             self.fail("Submit failed with error:"+str(err)) 
 

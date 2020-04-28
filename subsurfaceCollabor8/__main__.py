@@ -4,6 +4,7 @@ from subsurfaceCollabor8 import auth
 from subsurfaceCollabor8 import drilling as subsurfaceDrilling
 from subsurfaceCollabor8 import production as subsurfaceProduction
 from subsurfaceCollabor8 import common_utils
+from subsurfaceCollabor8 import reports
 @click.group()
 def messages():
   pass
@@ -150,6 +151,41 @@ def __initialize_logging(log_file):
 )
 
 
+@click.command(name='publish',help='Command to publish a report')
+@click.option('--reporttype',
+              type=click.Choice(['DPR10',
+               'DPR20',
+               'MPR-GOV',
+               'MPR-PARTNER',
+               'DDR-GOV'], 
+              case_sensitive=True),
+              help='The type of report to publish DPR20, MPR-GOV, MPR-PARTNER or DDR-GOV',
+              required=True)
+@click.option('--reportfile',
+              help='The full path to the report file to publish',
+              required=True)
+@click.option('--log',
+              help='The full path to the logfile where to write log information',
+              required=True)
+def publish(reporttype,reportfile,log):
+    __initialize_logging(log)
+    logging.info("Publishing report type:%s, file:%s",
+    reporttype,reportfile)
+    #get the token first
+    authInfo=auth.AuthInfo()
+    authInfo.init_from_env_vars()
+    try:
+        authObj=auth.Authenticate(authInfo) 
+        token=authObj.authenticate()
+        report=reports.Reports(token)
+        #map the report type to the enum
+        reportEnum=report.map_str_reporttype_to_enum(reporttype)
+        #submit it
+        result=report.publish(reportEnum,reportfile)
+        logging.info("Published report, response:%s",str(result))
+    except Exception as err:
+        logging.error("Failed in publish:%s",str(err))
+
 
 @click.command()
 @click.pass_context
@@ -160,6 +196,7 @@ def help(ctx):
 
 messages.add_command(drilling)
 messages.add_command(production)
+messages.add_command(publish)
 messages.add_command(help)
 
 if __name__ == '__main__':

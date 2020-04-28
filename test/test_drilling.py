@@ -154,6 +154,5 @@ class Test_Drilling(unittest.TestCase):
         except Exception as err:
             self.fail("Query drilling lithology failed with error:"+str(err)) 
     
-
 if __name__ == "__main__":
     unittest.main()

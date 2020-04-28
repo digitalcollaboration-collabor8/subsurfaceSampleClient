@@ -15,7 +15,7 @@ class Reports:
     """
     Reports class is used to validate and send reports to collabor8
     """
-    def __init__(self,reportType:ReportType,fileName:str,
+    def __init__(self,
     token:str,subscriptionKey="",validateUrl="",submitUrl=""):
         """
         Inits the reports class with the specified report type,
@@ -23,7 +23,6 @@ class Reports:
         Parameters
         ----------
 
-        fileName path to the file to send,
         token from authentication,
         subscriptionKey needed for API, if this is not specified tries to load it from environment variable
         validateUrl to use for validation, if this is not specified the code tries to read it from the environment variables
@@ -31,8 +30,6 @@ class Reports:
         
         """
         super().__init__()
-        self.reportType=reportType
-        self.__file=fileName
         self.__token=token 
         if subscriptionKey=="":
             #try reading it from environment variable
@@ -50,16 +47,16 @@ class Reports:
         else:
             self.__submitUrl=submitUrl
     
-    def validate(self):
+    def validate(self,reportType:ReportType,reportFile:str):
         """Validates the given file and report type against the Collabor8 API and return the
         response from the server as json
         """
         # get the file name and extension
-        _, filename = os.path.split(self.__file)
-        files = {'file': (filename, open(self.__file, 'rb'), 'application/xml')}
+        _, filename = os.path.split(reportFile)
+        files = {'file': (filename, open(reportFile, 'rb'), 'application/xml')}
         headers={
             "Authorization":"Bearer "+self.__token,
-            "Report-Type":self.reportType.value,
+            "Report-Type":reportType.value,
             "Accept": "application/json",
             "Ocp-Apim-Subscription-Key":self.__subscriptionKey
             }
@@ -72,16 +69,16 @@ class Reports:
             raise Exception('Failed in validation of file:'+str(err)+",response:"+str(response.json()))
         return response.json()
 
-    def publish(self):
+    def publish(self,reportType:ReportType,reportFile:str):
         """Publishes the given file and report type against the Collabor8 API and return the
         response from the server as json
         """
         # get the file name and extension
-        _, filename = os.path.split(self.__file)
-        files = {'file': (filename, open(self.__file, 'rb'), 'application/xml')}
+        _, filename = os.path.split(reportFile)
+        files = {'file': (filename, open(reportFile, 'rb'), 'application/xml')}
         headers={
             "Authorization":"Bearer "+self.__token,
-            "Report-Type":self.reportType.value,
+            "Report-Type":reportType.value,
             "Accept": "application/json",
             "Ocp-Apim-Subscription-Key":self.__subscriptionKey
             }
@@ -94,3 +91,15 @@ class Reports:
             raise Exception('Failed in submittal of file:'+str(err)+",response:"+str(response.json()))
         return response.json()    
     
+    def map_str_reporttype_to_enum(self,report_type):
+        if report_type==ReportType.DDRML.value:
+            return ReportType.DDRML
+        elif report_type==ReportType.DPR20.value:
+            return ReportType.DPR20
+        elif report_type==ReportType.MPRMLGOV.value:
+            return ReportType.MPRMLGOV
+        elif report_type==ReportType.MPRMLPARTNER.value:
+            return ReportType.MPRMLPARTNER
+        else:
+            raise Exception('Unknown report type specified:%s',report_type)
+
