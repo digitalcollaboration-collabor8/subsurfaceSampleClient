@@ -134,9 +134,10 @@ def production(datatype,format,start,end,asset,output,log):
             pObj.get_excel_data(output,start,end,asset,type_enum)
         else:
             logging.info("Unknown format...")
+        logging.info("Data written to:%s",output)
     except Exception as err:
         logging.error("Failed in processing of production data:%s",str(err))
-    logging.info("Data written to:%s",output)
+    
 
 def __initialize_logging(log_file):
     #make sure that the path to the logfile exists

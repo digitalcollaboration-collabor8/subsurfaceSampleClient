@@ -59,11 +59,12 @@ class Authenticate:
              response = requests.post(self.__authInfo.tokenUrl, data = authData)
              # If the response was successful, no Exception will be raised
              response.raise_for_status()
+             return response.json()['access_token']
         except HTTPError as http_err:
             raise HTTPError('HTTP error occurred:'+str(http_err))  
         except Exception as err:
             raise Exception('Other error occurred:'+str(err))  # Python 3.6
-        return response.json()['access_token']
+        
 
     
     
