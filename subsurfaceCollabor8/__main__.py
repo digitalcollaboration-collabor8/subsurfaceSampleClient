@@ -38,8 +38,9 @@ def messages():
 @click.option('--log',
               help='The full path to the logfile where to write log information',
               required=True)
-def drilling(datatype,format,start,end,wellbore,output,log):
-    __initialize_logging(log)
+@click.option('--debug/--no-debug', default=False)
+def drilling(datatype,format,start,end,wellbore,output,log,debug):
+    __initialize_logging(log,debug)
     logging.info("Extracting data for - dataType:%s, format:%s, start:%s, end:%s, wellbore:%s, output:%s",
     datatype,format,start,end,wellbore,output)
 
@@ -59,18 +60,21 @@ def drilling(datatype,format,start,end,wellbore,output,log):
         if format=='json':
             #handle json
             dObj.get_json_data_to_file(output,start,end,wellbore,type_enum)
+            logging.info("Data written to:%s",output)
 
         elif format=='csv':
             #handle csv
             dObj.get_csv_data(output,start,end,wellbore,type_enum)
+            logging.info("Data written to:%s",output)
         elif format=='excel':
             #handle excel
             dObj.get_excel_data(output,start,end,wellbore,type_enum)
+            logging.info("Data written to:%s",output)
         else:
             logging.info("Unknown format...")
     except Exception as err:
-        logging.error("Failed in processing of drilling data:%s",str(err))
-    logging.info("Data written to:%s",output)
+        logging.error("Failed in processing of drilling data:%s",str(err), exc_info=True)
+    
 
 
 @click.command(name='production',help='Command to specify if production data should be extracted')
@@ -105,8 +109,9 @@ def drilling(datatype,format,start,end,wellbore,output,log):
 @click.option('--log',
               help='The full path to the logfile where to write log information',
               required=True)
-def production(datatype,format,start,end,asset,output,log):
-    __initialize_logging(log)
+@click.option('--debug/--no-debug', default=False)
+def production(datatype,format,start,end,asset,output,log,debug):
+    __initialize_logging(log,debug)
     logging.info("Extracting data for - dataType:%s, format:%s, start:%s, end:%s, asset:%s, output:%s",
     datatype,format,start,end,asset,output)
 
@@ -125,31 +130,44 @@ def production(datatype,format,start,end,asset,output,log):
         if format=='json':
             #handle json
             pObj.get_json_data_to_file(output,start,end,asset,type_enum)
-
+            logging.info("Data written to:%s",output)
         elif format=='csv':
             #handle csv
             pObj.get_csv_data(output,start,end,asset,type_enum)
+            logging.info("Data written to:%s",output)
         elif format=='excel':
             #handle excel
             pObj.get_excel_data(output,start,end,asset,type_enum)
+            logging.info("Data written to:%s",output)
         else:
             logging.info("Unknown format...")
-        logging.info("Data written to:%s",output)
+        
     except Exception as err:
-        logging.error("Failed in processing of production data:%s",str(err))
+        logging.error("Failed in processing of production data:%s",str(err), exc_info=True)
     
 
-def __initialize_logging(log_file):
+def __initialize_logging(log_file,debug):
     #make sure that the path to the logfile exists
     common_utils.create_filepath_if_not_exists(log_file)
-    logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        logging.FileHandler(log_file),
-        logging.StreamHandler()
-    ]
-)
+    if debug==False:
+        logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] %(message)s",
+        handlers=[
+            logging.FileHandler(log_file),
+            logging.StreamHandler()
+        ]
+        )
+    else:
+        logging.basicConfig(
+        level=logging.DEBUG,
+        format="%(asctime)s [%(levelname)s] %(message)s",
+        handlers=[
+            logging.FileHandler(log_file),
+            logging.StreamHandler()
+        ]
+        )
+
 
 
 @click.command(name='publish',help='Command to publish a report')
@@ -168,8 +186,9 @@ def __initialize_logging(log_file):
 @click.option('--log',
               help='The full path to the logfile where to write log information',
               required=True)
-def publish(reporttype,reportfile,log):
-    __initialize_logging(log)
+@click.option('--debug/--no-debug', default=False)
+def publish(reporttype,reportfile,log,debug):
+    __initialize_logging(log,debug)
     logging.info("Publishing report type:%s, file:%s",
     reporttype,reportfile)
     #get the token first
@@ -185,7 +204,7 @@ def publish(reporttype,reportfile,log):
         result=report.publish(reportEnum,reportfile)
         logging.info("Published report, response:%s",str(result))
     except Exception as err:
-        logging.error("Failed in publish:%s",str(err))
+        logging.error("Failed in publish:%s",str(err),exc_info=True)
 
 
 @click.command()

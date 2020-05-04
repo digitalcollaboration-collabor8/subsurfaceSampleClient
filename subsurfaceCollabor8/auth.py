@@ -2,6 +2,7 @@ import requests
 import os
 from requests.exceptions import HTTPError
 import json 
+import logging
 
 class AuthInfo:
     clientId=None 
@@ -55,14 +56,20 @@ class Authenticate:
             "client_secret":self.__authInfo.clientSecret,
             "resource":self.__authInfo.resourceId
         }
+        logging.debug("Running auth with params:client_id:%s,secretLength:%d, resourceId:%s",
+        self.__authInfo.clientId,len(self.__authInfo.clientSecret),self.__authInfo.resourceId)
         try:
              response = requests.post(self.__authInfo.tokenUrl, data = authData)
              # If the response was successful, no Exception will be raised
+             logging.debug("Got auth response:code,%d, content:%s",response.status_code,
+             str(response.content))
              response.raise_for_status()
              return response.json()['access_token']
         except HTTPError as http_err:
+            logging.error(err,exc_info=True)
             raise HTTPError('HTTP error occurred:'+str(http_err))  
         except Exception as err:
+            logging.error(err,exc_info=True)
             raise Exception('Other error occurred:'+str(err))  # Python 3.6
         
 

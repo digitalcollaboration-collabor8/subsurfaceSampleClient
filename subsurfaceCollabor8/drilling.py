@@ -6,7 +6,7 @@ from subsurfaceCollabor8 import frame_utils
 from enum import Enum
 import json
 import os 
-
+import logging
 
 class DrillingDataType(Enum):
     ACTIVITIES = "activities"
@@ -33,6 +33,8 @@ class DrillingData:
         data_type : the type of drilling data to query for
 
         """
+        logging.debug("Running drilling query, period start:%s, period end:%s, enitity:%s, data type:%s",
+        period_start,period_end,entity,data_type.value)
         return self.__run_query(self.__build_query(period_start,period_end,entity,data_type))
     
     def get_json_data_to_file(self,output_file,period_start,period_end,entity,data_type:DrillingDataType):

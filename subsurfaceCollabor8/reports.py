@@ -2,7 +2,7 @@ import requests
 import os
 from enum import Enum
 import json
-
+import logging
 class ReportType(Enum):
     NONE = ""
     DPR10 = "DPR10"
@@ -63,6 +63,8 @@ class Reports:
         #send it
         try:
             response = requests.post(self.__validateUrl, files=files,headers=headers)
+            logging.debug("Got validate response:code,%d, content:%s",response.status_code,
+            str(response.content))
             # If the response was successful, no Exception will be raised
             response.raise_for_status()
         except Exception as err:
@@ -85,6 +87,8 @@ class Reports:
         #send it
         try:
             response = requests.post(self.__submitUrl, files=files,headers=headers)
+            logging.debug("Got publish response:code,%d, content:%s",response.status_code,
+            str(response.content))
             # If the response was successful, no Exception will be raised
             response.raise_for_status()
         except Exception as err:

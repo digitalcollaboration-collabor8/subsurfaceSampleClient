@@ -6,7 +6,7 @@ from subsurfaceCollabor8 import frame_utils
 from enum import Enum
 import json
 import os 
-
+import logging
 class ProductionDataType(Enum):
     PRODUCTION="Production"
     INJECTION="Injection"
@@ -37,6 +37,8 @@ class ProductionData:
         data_type : the type of production data to query for
 
         """
+        logging.debug("Getting production data, period start:%s, period end:%s, entity:%s, datatype:%s",
+        period_start,period_end,entity,data_type.value)
         return self.__run_query(self.__build_query(period_start,period_end,entity,data_type))
     
     def get_json_data_to_file(self,output_file,period_start,period_end,entity,data_type:ProductionDataType):

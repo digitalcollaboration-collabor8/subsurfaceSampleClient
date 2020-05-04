@@ -3,6 +3,7 @@ import os
 import json
 import pandas as pd
 from pandas.io.json import json_normalize
+import logging
 
 class Graph:
     def __init__(self,token:str,
@@ -40,13 +41,18 @@ class Graph:
             "Ocp-Apim-Subscription-Key":self.__subscriptionKey
             }
         #send it
+        
+        logging.debug("Running query:\n%s, subscriptionKey:%s",query,self.__subscriptionKey)
         try:
             response = requests.post(self.__graphUrl,json={"query": query},headers=headers)
+            logging.debug("Got query response:code,%d, content:%s",
+            response.status_code,
+             str(response.content))
             # If the response was successful, no Exception will be raised
             response.raise_for_status()
             return response.json()
         except Exception as err:
-            raise Exception('Failed in graphql query:'+str(err)+",response:"+str(response.json()))
+            raise Exception('Failed in graphql query:'+str(err)+",response:"+str(response))
 
     def query_to_file(self,query:str,file_path:str):
         """
