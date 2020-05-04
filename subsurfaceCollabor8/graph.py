@@ -42,7 +42,8 @@ class Graph:
             }
         #send it
         
-        logging.debug("Running query:\n%s, subscriptionKey:%s",query,self.__subscriptionKey)
+        logging.debug("Running query, url:%s, query:\n%s, subscriptionKey:%s",
+        self.__graphUrl,query,self.__subscriptionKey)
         try:
             response = requests.post(self.__graphUrl,json={"query": query},headers=headers)
             logging.debug("Got query response:code,%d, content:%s",

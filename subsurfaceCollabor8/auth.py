@@ -56,8 +56,9 @@ class Authenticate:
             "client_secret":self.__authInfo.clientSecret,
             "resource":self.__authInfo.resourceId
         }
-        logging.debug("Running auth with params:client_id:%s,secretLength:%d, resourceId:%s",
-        self.__authInfo.clientId,len(self.__authInfo.clientSecret),self.__authInfo.resourceId)
+        logging.debug("Running auth with params, url:%s, client_id:%s,secretLength:%d, resourceId:%s",
+        self.__authInfo.tokenUrl, self.__authInfo.clientId,len(self.__authInfo.clientSecret),
+        self.__authInfo.resourceId)
         try:
              response = requests.post(self.__authInfo.tokenUrl, data = authData)
              # If the response was successful, no Exception will be raised
