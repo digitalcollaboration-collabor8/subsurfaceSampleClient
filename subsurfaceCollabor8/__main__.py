@@ -5,6 +5,7 @@ from subsurfaceCollabor8 import drilling as subsurfaceDrilling
 from subsurfaceCollabor8 import production as subsurfaceProduction
 from subsurfaceCollabor8 import common_utils
 from subsurfaceCollabor8 import reports
+from datetime import datetime
 @click.group()
 def messages():
   pass
@@ -39,11 +40,16 @@ def messages():
               help='The full path to the logfile where to write log information',
               required=True)
 @click.option('--debug/--no-debug', default=False)
-def drilling(datatype,format,start,end,wellbore,output,log,debug):
+@click.option('--rolldays',
+               help='Number of days to automatically roll data',
+               default=0,
+               required=False )
+def drilling(datatype,format,start,end,wellbore,output,log,debug,rolldays):
     __initialize_logging(log,debug)
     logging.info("Extracting data for - dataType:%s, format:%s, start:%s, end:%s, wellbore:%s, output:%s",
     datatype,format,start,end,wellbore,output)
-
+    toDate=end 
+    fromDate=start
     #get the token first
     authInfo=auth.AuthInfo()
     authInfo.init_from_env_vars()
@@ -56,19 +62,23 @@ def drilling(datatype,format,start,end,wellbore,output,log,debug):
         dObj=subsurfaceDrilling.DrillingData(token)
         #map the datatype
         type_enum=dObj.map_str_activity_to_enum(datatype)
+        #handle rolldays
+        if rolldays>0:
+            toDate=common_utils.format_date_to_yy_mm_dd(common_utils.add_days(datetime.today(),1))
+            fromDate=common_utils.format_date_to_yy_mm_dd(common_utils.substract_days(datetime.today(),rolldays))
         #need to handle the format
         if format=='json':
             #handle json
-            dObj.get_json_data_to_file(output,start,end,wellbore,type_enum)
+            dObj.get_json_data_to_file(output,fromDate,toDate,wellbore,type_enum)
             logging.info("Data written to:%s",output)
 
         elif format=='csv':
             #handle csv
-            dObj.get_csv_data(output,start,end,wellbore,type_enum)
+            dObj.get_csv_data(output,fromDate,toDate,wellbore,type_enum)
             logging.info("Data written to:%s",output)
         elif format=='excel':
             #handle excel
-            dObj.get_excel_data(output,start,end,wellbore,type_enum)
+            dObj.get_excel_data(output,fromDate,toDate,wellbore,type_enum)
             logging.info("Data written to:%s",output)
         else:
             logging.info("Unknown format...")
@@ -110,11 +120,16 @@ def drilling(datatype,format,start,end,wellbore,output,log,debug):
               help='The full path to the logfile where to write log information',
               required=True)
 @click.option('--debug/--no-debug', default=False)
-def production(datatype,format,start,end,asset,output,log,debug):
+@click.option('--rolldays',
+               help='Number of days to automatically roll data',
+               default=0,
+               required=False )
+def production(datatype,format,start,end,asset,output,log,debug,rolldays):
     __initialize_logging(log,debug)
-    logging.info("Extracting data for - dataType:%s, format:%s, start:%s, end:%s, asset:%s, output:%s",
+    logging.info("Extracting data for - dataType:%s, format:%s, st art:%s, end:%s, asset:%s, output:%s",
     datatype,format,start,end,asset,output)
-
+    fromDate=start 
+    toDate=end
     #get the token first
     authInfo=auth.AuthInfo()
     authInfo.init_from_env_vars()
@@ -126,18 +141,22 @@ def production(datatype,format,start,end,asset,output,log,debug):
         pObj=subsurfaceProduction.ProductionData(token)
         #map the datatype
         type_enum=pObj.map_str_prod_datatype_to_enum(datatype)
+        #need to check if we should just rolldays
+        if rolldays>0:
+            toDate=common_utils.format_date_to_yy_mm_dd(common_utils.add_days(datetime.today(),1))
+            fromDate=common_utils.format_date_to_yy_mm_dd(common_utils.substract_days(datetime.today(),rolldays))
         #need to handle the format
         if format=='json':
             #handle json
-            pObj.get_json_data_to_file(output,start,end,asset,type_enum)
+            pObj.get_json_data_to_file(output,fromDate,toDate,asset,type_enum)
             logging.info("Data written to:%s",output)
         elif format=='csv':
             #handle csv
-            pObj.get_csv_data(output,start,end,asset,type_enum)
+            pObj.get_csv_data(output,fromDate,toDate,asset,type_enum)
             logging.info("Data written to:%s",output)
         elif format=='excel':
             #handle excel
-            pObj.get_excel_data(output,start,end,asset,type_enum)
+            pObj.get_excel_data(output,fromDate,toDate,asset,type_enum)
             logging.info("Data written to:%s",output)
         else:
             logging.info("Unknown format...")
