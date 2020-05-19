@@ -16,7 +16,8 @@ setuptools.setup(
         'pandas>=1.0.3',
         'requests>=2.23.0',
         'openpyxl>=3.0.0',
-        'click>=7.1.1'
+        'click>=7.1.1',
+        'xmltodict>=0.12.0'
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

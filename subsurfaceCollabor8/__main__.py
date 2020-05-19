@@ -20,7 +20,7 @@ def messages():
               help='The type of drilling data to query for: activities, lithology or status_info',
               required=True)
 @click.option('--format',
-              type=click.Choice(['json', 'csv','excel'], 
+              type=click.Choice(['json', 'csv','excel','xml'], 
               case_sensitive=True),
               help='The type of format to extract the data to',
               required=True)
@@ -71,7 +71,9 @@ def drilling(datatype,format,start,end,wellbore,output,log,debug,rolldays):
             #handle json
             dObj.get_json_data_to_file(output,fromDate,toDate,wellbore,type_enum)
             logging.info("Data written to:%s",output)
-
+        elif format=='xml':
+            dObj.get_xml_data(output,fromDate,toDate,wellbore,type_enum)
+            logging.info("Data written to:%s",output)
         elif format=='csv':
             #handle csv
             dObj.get_csv_data(output,fromDate,toDate,wellbore,type_enum)
@@ -100,7 +102,7 @@ def drilling(datatype,format,start,end,wellbore,output,log,debug,rolldays):
               help='The type of production data to query for, e.g. to get export volumes user "export" to get consumption (fuel/flare++) use "Consumption"',
               required=True)
 @click.option('--format',
-              type=click.Choice(['json', 'csv','excel'], 
+              type=click.Choice(['json', 'csv','excel','xml'], 
               case_sensitive=True),
               help='The type of format to extract the data to',
               required=True)
@@ -149,6 +151,9 @@ def production(datatype,format,start,end,asset,output,log,debug,rolldays):
         if format=='json':
             #handle json
             pObj.get_json_data_to_file(output,fromDate,toDate,asset,type_enum)
+            logging.info("Data written to:%s",output)
+        elif format=='xml':
+            pObj.get_xml_data(output,fromDate,toDate,asset,type_enum)
             logging.info("Data written to:%s",output)
         elif format=='csv':
             #handle csv

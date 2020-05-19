@@ -31,3 +31,8 @@ def format_date(date, format):
 
 def format_date_to_yy_mm_dd(date):
     return format_date(date,'%Y-%m-%d')
+
+def write_str_to_file(data,file):
+    text_file = open(file, "w")
+    n = text_file.write(data)
+    text_file.close()

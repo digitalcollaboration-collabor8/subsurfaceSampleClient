@@ -3,6 +3,8 @@ from subsurfaceCollabor8 import auth
 from subsurfaceCollabor8 import graph
 from subsurfaceCollabor8 import production_frames
 from subsurfaceCollabor8 import frame_utils
+from subsurfaceCollabor8 import common_utils
+from xmltodict import unparse
 from enum import Enum
 import json
 import os 
@@ -59,6 +61,8 @@ class ProductionData:
         with open(output_file, 'w') as fp:
             json.dump(data, fp)
     
+
+
     def get_csv_data(self,output_file,period_start,period_end,entity,data_type:ProductionDataType):
         """
         Will run a GraphQL query against the Collabor8 platform and ask for production data of the given type
@@ -78,6 +82,26 @@ class ProductionData:
         frame=self.__convert_data_to_frame(json,data_type)
         frame_utils.frame_to_csv(frame,output_file)
     
+    def get_xml_data(self,output_file,period_start,period_end,entity,data_type:ProductionDataType):
+        '''
+        Will run a graphql query and write the results to an xml file
+        
+        Parameters
+        ----------
+        output_file : full path to where to store csv file
+        period_start : start of period to query for
+        period_end : end of period to query for
+        entity : name of asset/entity to query for
+        data_type : the type of production data to query for
+        
+        '''
+        json=self.get_json_data(period_start,period_end,entity,data_type)
+        #convert it to an xml file
+        xmldata=unparse(json, pretty=True)
+        #write it to the file
+        common_utils.write_str_to_file(xmldata,output_file)
+
+
     def get_excel_data(self,output_file,period_start,period_end,entity,data_type:ProductionDataType):
         """
         Will run a GraphQL query against the Collabor8 platform and ask for productiong data of 
