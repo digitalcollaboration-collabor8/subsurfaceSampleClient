@@ -336,12 +336,98 @@ def get_production_volumes(period_start,period_end,entity_name,volume_type):
   s = Template(query)
   return s.substitute(start=period_start,end=period_end,name=entity_name,type=volume_type)
 
-def get_production_volumes_regex(period_start,period_end,entity_name,volume_type):
+def get_production_volumes_regex(period_start,period_end,entity_name,volume_type,product=''):
   """
   Creates a production volumes query with the given period and tries to match entity names
   using a regex pattern
   """
-  query='''
+  query=''
+  if product=="":
+    query=__get_production_query() 
+  else:
+    query=__get_production_query_for_product()
+  print (str(query))
+  s = Template(query)
+  return s.substitute(start=period_start,end=period_end,name=entity_name,type=volume_type,
+  product_type=product)
+
+
+def __get_production_query_for_product():
+  query= '''
+    query {
+  production {
+    data(
+      start: "$start"
+      end: "$end"
+      report_data_subtypes: ["$type"]
+      entity_names_rx: ["/^$name.*/i"]
+      products: ["$product_type"]
+      limit: 1000
+    ) {
+      sourceSystemReportName
+      sourceStartTime
+      sourceEndTime
+      dataStartTime
+      dataEndTime
+      sourceEntity {
+        name
+        type
+      }
+      owningEntity {
+        name
+        type
+      }
+      dataEntity {
+        name
+        type
+      }
+      dataPeriod
+      name
+      type
+      product
+      productName
+      qualifier
+      volume {
+        uom
+        value
+      }
+     
+      wellMeasurements {
+        chokeSize {
+          uom
+          value
+        }
+        whp {
+          uom
+          value
+        }
+        wht {
+          uom
+          value
+        }
+        bhp {
+          uom
+          value
+        }
+        bht {
+          uom
+          value
+        }
+      }
+      sourceSystemName
+      sourceSystemVersion
+      quality
+      created
+      modified
+    }
+    
+  }
+}
+    '''
+  return query
+
+def __get_production_query():
+  query= '''
     query {
   production {
     data(
@@ -411,7 +497,4 @@ def get_production_volumes_regex(period_start,period_end,entity_name,volume_type
   }
 }
     '''
-  s = Template(query)
-  return s.substitute(start=period_start,end=period_end,name=entity_name,type=volume_type)
-
-
+  return query

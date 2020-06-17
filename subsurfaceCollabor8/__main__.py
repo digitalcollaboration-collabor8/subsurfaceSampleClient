@@ -126,7 +126,10 @@ def drilling(datatype,format,start,end,wellbore,output,log,debug,rolldays):
                help='Number of days to automatically roll data',
                default=0,
                required=False )
-def production(datatype,format,start,end,asset,output,log,debug,rolldays):
+@click.option('--product',
+              help='The product to query for e.g. gas',
+              required=False, default='')
+def production(datatype,format,start,end,asset,output,log,debug,rolldays,product):
     __initialize_logging(log,debug)
     logging.info("Extracting data for - dataType:%s, format:%s, st art:%s, end:%s, asset:%s, output:%s",
     datatype,format,start,end,asset,output)
@@ -150,18 +153,18 @@ def production(datatype,format,start,end,asset,output,log,debug,rolldays):
         #need to handle the format
         if format=='json':
             #handle json
-            pObj.get_json_data_to_file(output,fromDate,toDate,asset,type_enum)
+            pObj.get_json_data_to_file(output,fromDate,toDate,asset,type_enum,product)
             logging.info("Data written to:%s",output)
         elif format=='xml':
-            pObj.get_xml_data(output,fromDate,toDate,asset,type_enum)
+            pObj.get_xml_data(output,fromDate,toDate,asset,type_enum,product)
             logging.info("Data written to:%s",output)
         elif format=='csv':
             #handle csv
-            pObj.get_csv_data(output,fromDate,toDate,asset,type_enum)
+            pObj.get_csv_data(output,fromDate,toDate,asset,type_enum,product)
             logging.info("Data written to:%s",output)
         elif format=='excel':
             #handle excel
-            pObj.get_excel_data(output,fromDate,toDate,asset,type_enum)
+            pObj.get_excel_data(output,fromDate,toDate,asset,type_enum,product)
             logging.info("Data written to:%s",output)
         else:
             logging.info("Unknown format...")
