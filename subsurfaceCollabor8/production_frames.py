@@ -1,5 +1,5 @@
 from pandas import json_normalize
-
+import pandas as pd
 
 
 
@@ -34,5 +34,30 @@ def production_volumes_to_frame(data):
 4  2017-11-01T00:00:00Z  2017-11-02T00:00:00Z  2017-11-01T00:00:00Z  2017-11-02T00:00:00Z        day  ...                        34/10-A-23            well        Sm3  444.958302
 
     """
-    result=json_normalize(data,['data','production','data'])
+    #need to handle well and wellbores separately
+    wells=[]
+    other=[]
+    for item in data['data']['production']['data']:
+        if item['dataEntity']['type']=='wellbore' or item['dataEntity']['type']=='well':
+            #just unpack measurements
+            for key in item['wellMeasurements'].keys():
+                wellitem=item['wellMeasurements'][key]
+                name='wellMeasurements.'+key
+                value=''
+                uom=''
+                if len(wellitem)>0:
+                    value=wellitem[0]['value']
+                    uom=wellitem[0]['uom']
+                item[name+".value"]=value 
+                item[name+".uom"]=uom 
+            #null out the wellmeasurements
+            item['wellMeasurements']={}
+            wells.append(item)
+        else:
+            other.append(item)
+
+    result_wells=json_normalize(wells)
+    result_others=json_normalize(other)
+    #concat the 2 frames into one...
+    result=pd.concat([result_wells,result_others])
     return result

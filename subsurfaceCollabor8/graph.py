@@ -42,14 +42,15 @@ class Graph:
             }
         #send it
         
-        logging.debug("Running query, url:%s, query:\n%s, subscriptionKey:%s",
-        self.__graphUrl,query,self.__subscriptionKey)
+        
         try:
+            logging.debug("Running query, url:%s, query:\n%s, subscriptionKey:%s",
+        self.__graphUrl,query,self.__subscriptionKey)        
             response = requests.post(self.__graphUrl,json={"query": query},headers=headers)
             logging.debug("Got query response:code,%d, content:%s",
             response.status_code,
              str(response.content))
-            # If the response was successful, no Exception will be raised
+          
             response.raise_for_status()
             return response.json()
         except Exception as err:
