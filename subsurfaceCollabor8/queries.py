@@ -412,6 +412,23 @@ def __get_production_query_for_product():
           uom
           value
         }
+        operationTime{
+          uom 
+          value
+        }
+         annulusTemp
+        {
+        uom 
+        value
+        }
+        annulusPress{
+          uom 
+          value 
+        }
+        dscp{
+          uom 
+          value
+        }
       }
       sourceSystemName
       sourceSystemVersion
@@ -483,6 +500,23 @@ def __get_production_query():
         }
         bht {
           uom
+          value
+        }
+        operationTime{
+          uom 
+          value
+        }
+         annulusTemp
+        {
+        uom 
+        value
+        }
+        annulusPress{
+          uom 
+          value 
+        }
+        dscp{
+          uom 
           value
         }
       }
