@@ -67,7 +67,7 @@ class Authenticate:
              response.raise_for_status()
              return response.json()['access_token']
         except HTTPError as http_err:
-            logging.error(err,exc_info=True)
+            logging.error(http_err,exc_info=True)
             raise HTTPError('HTTP error occurred:'+str(http_err))  
         except Exception as err:
             logging.error(err,exc_info=True)
