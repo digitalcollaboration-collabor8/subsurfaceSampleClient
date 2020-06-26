@@ -44,7 +44,10 @@ def messages():
                help='Number of days to automatically roll data',
                default=0,
                required=False )
-def drilling(datatype,format,start,end,wellbore,output,log,debug,rolldays):
+@click.option('--decimalformat',
+              help='The decimal format to use for decimal separator',
+              required=False, default=',')
+def drilling(datatype,format,start,end,wellbore,output,log,debug,rolldays,decimalformat):
     __initialize_logging(log,debug)
     logging.info("Extracting data for - dataType:%s, format:%s, start:%s, end:%s, wellbore:%s, output:%s",
     datatype,format,start,end,wellbore,output)
@@ -76,7 +79,7 @@ def drilling(datatype,format,start,end,wellbore,output,log,debug,rolldays):
             logging.info("Data written to:%s",output)
         elif format=='csv':
             #handle csv
-            dObj.get_csv_data(output,fromDate,toDate,wellbore,type_enum)
+            dObj.get_csv_data(output,fromDate,toDate,wellbore,type_enum,decimalformat)
             logging.info("Data written to:%s",output)
         elif format=='excel':
             #handle excel
@@ -129,7 +132,10 @@ def drilling(datatype,format,start,end,wellbore,output,log,debug,rolldays):
 @click.option('--product',
               help='The product to query for e.g. gas',
               required=False, default='')
-def production(datatype,format,start,end,asset,output,log,debug,rolldays,product):
+@click.option('--decimalformat',
+              help='The decimal format to use for decimal separator',
+              required=False, default=',')
+def production(datatype,format,start,end,asset,output,log,debug,rolldays,product,decimalformat):
     __initialize_logging(log,debug)
     logging.info("Extracting data for - dataType:%s, format:%s, st art:%s, end:%s, asset:%s, output:%s",
     datatype,format,start,end,asset,output)
@@ -160,7 +166,7 @@ def production(datatype,format,start,end,asset,output,log,debug,rolldays,product
             logging.info("Data written to:%s",output)
         elif format=='csv':
             #handle csv
-            pObj.get_csv_data(output,fromDate,toDate,asset,type_enum,product)
+            pObj.get_csv_data(output,fromDate,toDate,asset,type_enum,product,decimalformat)
             logging.info("Data written to:%s",output)
         elif format=='excel':
             #handle excel

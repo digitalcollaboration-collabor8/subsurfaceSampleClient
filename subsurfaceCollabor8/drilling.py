@@ -57,7 +57,7 @@ class DrillingData:
         with open(output_file, 'w') as fp:
             json.dump(data, fp)
     
-    def get_csv_data(self,output_file,period_start,period_end,entity,data_type:DrillingDataType):
+    def get_csv_data(self,output_file,period_start,period_end,entity,data_type:DrillingDataType,decimal_format=','):
         """
         Will run a GraphQL query against the Collabor8 platform and ask for drilling data of the given type
         and using the specified OAuth2 token for authentication. Data is written to the specified csv file.
@@ -69,12 +69,12 @@ class DrillingData:
         period_end : end of period to query for
         entity : name of wellbore to query for
         data_type : the type of drilling data to query for
-
+        decimal_format : the decimal format to use e.g. , or .
         """
         json=self.get_json_data(period_start,period_end,entity,data_type)
         #convert it to a pandas frame
         frame=self.__convert_data_to_frame(json,data_type)
-        frame_utils.frame_to_csv(frame,output_file)
+        frame_utils.frame_to_csv(frame,output_file,decimal_format=decimal_format)
     
     def get_xml_data(self,output_file,period_start,period_end,entity,data_type:DrillingDataType):
         """
@@ -111,7 +111,6 @@ class DrillingData:
         period_end : end of period to query for
         entity : name of wellbore to query for
         data_type : the type of drilling data to query for
-        
         """
         json=self.get_json_data(period_start,period_end,entity,data_type)
         #convert it to a pandas frame

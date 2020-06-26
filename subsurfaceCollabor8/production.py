@@ -64,7 +64,7 @@ class ProductionData:
     
 
 
-    def get_csv_data(self,output_file,period_start,period_end,entity,data_type:ProductionDataType,product=''):
+    def get_csv_data(self,output_file,period_start,period_end,entity,data_type:ProductionDataType,product='',decimal_format=','):
         """
         Will run a GraphQL query against the Collabor8 platform and ask for production data of the given type
         and using the specified OAuth2 token for authentication. Data is written to the specified csv file.
@@ -76,12 +76,13 @@ class ProductionData:
         period_end : end of period to query for
         entity : name of asset/entity to query for
         data_type : the type of production data to query for
+        decimal_format : the decimal format to use
 
         """
         json=self.get_json_data(period_start,period_end,entity,data_type,product)
         #convert it to a pandas frame
         frame=self.__convert_data_to_frame(json,data_type)
-        frame_utils.frame_to_csv(frame,output_file)
+        frame_utils.frame_to_csv(frame,output_file,decimal_format=decimal_format)
     
     def get_xml_data(self,output_file,period_start,period_end,entity,data_type:ProductionDataType,product=''):
         '''
