@@ -322,6 +322,23 @@ def get_production_volumes(period_start,period_end,entity_name,volume_type):
           uom
           value
         }
+        operationTime{
+          uom 
+          value
+        }
+         annulusTemp
+        {
+        uom 
+        value
+        }
+        annulusPress{
+          uom 
+          value 
+        }
+        dscp{
+          uom 
+          value
+        }
       }
       sourceSystemName
       sourceSystemVersion
