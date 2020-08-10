@@ -24,7 +24,8 @@ class ProductionData:
         super().__init__()
         self.__token=token
 
-    def get_json_data(self,period_start,period_end,entity,data_type:ProductionDataType,product=''):
+    def get_json_data(self,period_start,period_end,entity,
+    data_type:ProductionDataType,product='', reportType=''):
         """
         Will run a GraphQL query against the Collabor8 platform and ask for production data of 
         the given type and using the specified OAuth2 token for authentication. 
@@ -38,13 +39,14 @@ class ProductionData:
         entity : name of asset/entity to query for
         data_type : the type of production data to query for
         product: the possible product to query for e.g. gas
-
+        reportType: the type of report to query for, default all, e.g. use MPRML-GOV, DPR and so on
         """
         logging.debug("Getting production data, period start:%s, period end:%s, entity:%s, datatype:%s, product:%s",
         period_start,period_end,entity,data_type.value,product)
-        return self.__run_query(self.__build_query(period_start,period_end,entity,data_type,product))
+        return self.__run_query(self.__build_query(period_start,period_end,entity,data_type,product,reportType))
     
-    def get_json_data_to_file(self,output_file,period_start,period_end,entity,data_type:ProductionDataType,product=''):
+    def get_json_data_to_file(self,output_file,period_start,period_end,entity,
+    data_type:ProductionDataType,product='',reportType=''):
         """
         Will run a GraphQL query against the Collabor8 platform and ask for production data of the given type
         and using the specified OAuth2 token for authentication. Data is returned as a json dict
@@ -56,15 +58,16 @@ class ProductionData:
         period_end : end of period to query for
         entity : name of asset/entity to query for
         data_type : the type of production data to query for
-
+        reportType: the type of report to query for, default all, e.g. use MPRML-GOV, DPR and so on
         """
-        data=self.__run_query(self.__build_query(period_start,period_end,entity,data_type,product))
+        data=self.__run_query(self.__build_query(period_start,period_end,entity,data_type,product,reportType))
         with open(output_file, 'w') as fp:
             json.dump(data, fp)
     
 
 
-    def get_csv_data(self,output_file,period_start,period_end,entity,data_type:ProductionDataType,product='',decimal_format=','):
+    def get_csv_data(self,output_file,period_start,period_end,entity,
+    data_type:ProductionDataType,product='',decimal_format=',',reportType=''):
         """
         Will run a GraphQL query against the Collabor8 platform and ask for production data of the given type
         and using the specified OAuth2 token for authentication. Data is written to the specified csv file.
@@ -77,14 +80,15 @@ class ProductionData:
         entity : name of asset/entity to query for
         data_type : the type of production data to query for
         decimal_format : the decimal format to use
-
+        reportType: the type of report to query for, default all, e.g. use MPRML-GOV, DPR and so on
         """
-        json=self.get_json_data(period_start,period_end,entity,data_type,product)
+        json=self.get_json_data(period_start,period_end,entity,data_type,product,reportType)
         #convert it to a pandas frame
         frame=self.__convert_data_to_frame(json,data_type)
         frame_utils.frame_to_csv(frame,output_file,decimal_format=decimal_format)
     
-    def get_xml_data(self,output_file,period_start,period_end,entity,data_type:ProductionDataType,product=''):
+    def get_xml_data(self,output_file,period_start,period_end,entity,
+    data_type:ProductionDataType,product='',reportType=''):
         '''
         Will run a graphql query and write the results to an xml file
         
@@ -95,16 +99,17 @@ class ProductionData:
         period_end : end of period to query for
         entity : name of asset/entity to query for
         data_type : the type of production data to query for
-        
+        reportType: the type of report to query for, default all, e.g. use MPRML-GOV, DPR and so on
         '''
-        json=self.get_json_data(period_start,period_end,entity,data_type,product)
+        json=self.get_json_data(period_start,period_end,entity,data_type,product,reportType)
         #convert it to an xml file
         xmldata=unparse(json, pretty=True)
         #write it to the file
         common_utils.write_str_to_file(xmldata,output_file)
 
 
-    def get_excel_data(self,output_file,period_start,period_end,entity,data_type:ProductionDataType,product=''):
+    def get_excel_data(self,output_file,period_start,period_end,entity,
+    data_type:ProductionDataType,product='',reportType=''):
         """
         Will run a GraphQL query against the Collabor8 platform and ask for productiong data of 
         the given type and using the specified OAuth2 token for authentication. Data is as a Excel file using the specified output_file path
@@ -117,17 +122,17 @@ class ProductionData:
         period_end : end of period to query for
         entity : name of asset/entity to query for
         data_type : the type of production data to query for
-        
+        reportType: the type of report to query for, default all, e.g. use MPRML-GOV, DPR and so on
         """
         json=self.get_json_data(period_start,period_end,entity,data_type,
-        product)
+        product,reportType)
         #convert it to a pandas frame
         frame=self.__convert_data_to_frame(json,data_type)
         frame_utils.frame_to_excel(frame,output_file)
     
-    def __build_query(self,period_start,period_end,entity,data_type:ProductionDataType,product):
+    def __build_query(self,period_start,period_end,entity,data_type:ProductionDataType,product,reportType):
         return queries.get_production_volumes_regex(period_start,
-            period_end,entity,data_type.value,product)
+            period_end,entity,data_type.value,product,reportType)
     
     def map_str_prod_datatype_to_enum(self,data_type):
 

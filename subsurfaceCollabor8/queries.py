@@ -353,7 +353,8 @@ def get_production_volumes(period_start,period_end,entity_name,volume_type):
   s = Template(query)
   return s.substitute(start=period_start,end=period_end,name=entity_name,type=volume_type)
 
-def get_production_volumes_regex(period_start,period_end,entity_name,volume_type,product=''):
+def get_production_volumes_regex(period_start,period_end,
+entity_name,volume_type,product='',reportType=''):
   """
   Creates a production volumes query with the given period and tries to match entity names
   using a regex pattern
@@ -363,9 +364,13 @@ def get_production_volumes_regex(period_start,period_end,entity_name,volume_type
     query=__get_production_query() 
   else:
     query=__get_production_query_for_product()
+  #additional filtering
+  addFilter=''
+  if reportType!='':
+    addFilter=addFilter+'source_system_names: ["'+reportType+'"] '
   s = Template(query)
   return s.substitute(start=period_start,end=period_end,name=entity_name,type=volume_type,
-  product_type=product)
+  product_type=product,add_filter=addFilter)
 
 
 def __get_production_query_for_product():
@@ -378,6 +383,7 @@ def __get_production_query_for_product():
       report_data_subtypes: ["$type"]
       entity_names_rx: ["/^$name.*/i"]
       products: ["$product_type"]
+      $add_filter
       limit: 1000
     ) {
       sourceSystemReportName
@@ -468,6 +474,7 @@ def __get_production_query():
       end: "$end"
       report_data_subtypes: ["$type"]
       entity_names_rx: ["/^$name.*/i"]
+      $add_filter
       limit: 1000
     ) {
       sourceSystemReportName

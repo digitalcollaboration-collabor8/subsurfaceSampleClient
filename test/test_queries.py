@@ -58,8 +58,49 @@ class Test_TestQueries(unittest.TestCase):
             self.fail("Couldn't find volume_type:"+volume_type+"in string:"+result)
         if not 'oil' in result:
             self.fail("Couldn't find product:oil in string:"+result)
-       
-        
+    
+    def test_get_production_volums_with_empty_reportypes(self):
+        start="2020-01-21T23:00:00.000Z"
+        end="2020-03-26T12:00:00.000Z"
+        entity="GINA KROG"
+        volume_type="Production"
+        reportType=""
+        result=queries.get_production_volumes_regex(start,
+        end,entity,volume_type,'oil',reportType)
+        if not start in result:
+            self.fail("Couldn't find start:"+start+"in string:"+result)
+        if not end in result:
+            self.fail("Couldn't find en:"+end+"in string:"+result)
+        if not entity in result:
+            self.fail("Couldn't find entity:"+entity+"in string:"+result)
+        if not volume_type in result:
+            self.fail("Couldn't find volume_type:"+volume_type+"in string:"+result)
+        if not 'oil' in result:
+            self.fail("Couldn't find product:oil in string:"+result)
+        if 'source_system_names: ["DPR"]' in result:
+            self.fail('Found report type: DPR which should not be there')
+    
+    def test_get_production_volums_with_reportypes(self):
+        start="2020-01-21T23:00:00.000Z"
+        end="2020-03-26T12:00:00.000Z"
+        entity="GINA KROG"
+        volume_type="Production"
+        reportType="DPR"
+        result=queries.get_production_volumes_regex(start,
+        end,entity,volume_type,'oil',reportType)
+        if not start in result:
+            self.fail("Couldn't find start:"+start+"in string:"+result)
+        if not end in result:
+            self.fail("Couldn't find en:"+end+"in string:"+result)
+        if not entity in result:
+            self.fail("Couldn't find entity:"+entity+"in string:"+result)
+        if not volume_type in result:
+            self.fail("Couldn't find volume_type:"+volume_type+"in string:"+result)
+        if not 'oil' in result:
+            self.fail("Couldn't find product:oil in string:"+result)
+        if not 'source_system_names: ["DPR"]' in result:
+            self.fail('Did not fint report type: DPR which shouldbe there')
+    
         
 
         
