@@ -2,6 +2,7 @@
 import unittest
 from subsurfaceCollabor8 import auth
 import json
+import logging
 class Test_TestAuthentication(unittest.TestCase):
     def test_authinfo(self):
         clientId="clientId"
@@ -17,6 +18,7 @@ class Test_TestAuthentication(unittest.TestCase):
         self.assertEqual(authObj.subscriptionKey,subscriptionKey)      
     
     def test_authenticate_fail_missing_authinfo(self):
+        logging.disable(logging.CRITICAL) #disable error logging for this case as it should fail
         clientId="clientId"
         clientSecret="clientSecret"
         tokenUrl="tokenUrl"
