@@ -53,7 +53,8 @@ class Reports:
         """
         # get the file name and extension
         _, filename = os.path.split(reportFile)
-        files = {'file': (filename, open(reportFile, 'rb'), 'application/xml')}
+        fObj=open(reportFile, 'rb')
+        files = {'file': (filename, fObj, 'application/xml')}
         headers={
             "Authorization":"Bearer "+self.__token,
             "Report-Type":reportType.value,
@@ -69,6 +70,8 @@ class Reports:
             response.raise_for_status()
         except Exception as err:
             raise Exception('Failed in validation of file:'+str(err)+",response:"+str(response.json()))
+        finally:
+            fObj.close()
         return response.json()
 
     def publish(self,reportType:ReportType,reportFile:str):
@@ -77,7 +80,8 @@ class Reports:
         """
         # get the file name and extension
         _, filename = os.path.split(reportFile)
-        files = {'file': (filename, open(reportFile, 'rb'), 'application/xml')}
+        fObj=open(reportFile, 'rb')
+        files = {'file': (filename,fObj , 'application/xml')}
         headers={
             "Authorization":"Bearer "+self.__token,
             "Report-Type":reportType.value,
@@ -93,6 +97,8 @@ class Reports:
             response.raise_for_status()
         except Exception as err:
             raise Exception('Failed in submittal of file:'+str(err)+",response:"+str(response.json()))
+        finally:
+            fObj.close()
         return response.json()    
     
     def map_str_reporttype_to_enum(self,report_type):
