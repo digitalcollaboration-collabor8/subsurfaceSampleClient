@@ -40,19 +40,20 @@ def production_volumes_to_frame(data):
     for item in data['data']['production']['data']:
         if item['dataEntity']['type']=='wellbore' or item['dataEntity']['type']=='well':
             #just unpack measurements
-            for key in item['wellMeasurements'].keys():
-                wellitem=item['wellMeasurements'][key]
-                name='wellMeasurements.'+key
-                value=''
-                uom=''
-                if len(wellitem)>0:
-                    value=wellitem[0]['value']
-                    uom=wellitem[0]['uom']
-                item[name+".value"]=value 
-                item[name+".uom"]=uom 
-            #null out the wellmeasurements
-            item['wellMeasurements']={}
-            wells.append(item)
+            if item['wellMeasurements']!=None:
+                for key in item['wellMeasurements'].keys():
+                    wellitem=item['wellMeasurements'][key]
+                    name='wellMeasurements.'+key
+                    value=''
+                    uom=''
+                    if len(wellitem)>0:
+                        value=wellitem[0]['value']
+                        uom=wellitem[0]['uom']
+                    item[name+".value"]=value 
+                    item[name+".uom"]=uom 
+                #null out the wellmeasurements
+                item['wellMeasurements']={}
+                wells.append(item)
         else:
             other.append(item)
 
