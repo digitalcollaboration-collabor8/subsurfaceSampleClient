@@ -144,7 +144,10 @@ def drilling(datatype,format,start,end,wellbore,output,log,debug,rolldays,decima
               help='The type of report type to query for (optional) e.g. MPRML-GOV, DPR and so on',
               required=False,
               default='ANY')
-def production(datatype,format,start,end,asset,output,log,debug,rolldays,product,decimalformat,reporttype):
+@click.option('--filter',
+              help='A possible additional filter to add to filter the data even more e.g. data_periods:["day"] to only include data with registered period day',
+              required=False, default='')
+def production(datatype,format,start,end,asset,output,log,debug,rolldays,product,decimalformat,reporttype,filter):
     __initialize_logging(log,debug)
     logging.info("Extracting data for - dataType:%s, format:%s, start:%s, end:%s, asset:%s, output:%s, reporttype:%s",
     datatype,format,start,end,asset,output,reporttype)
@@ -170,18 +173,18 @@ def production(datatype,format,start,end,asset,output,log,debug,rolldays,product
         #need to handle the format
         if format=='json':
             #handle json
-            pObj.get_json_data_to_file(output,fromDate,toDate,asset,type_enum,product,reporttype)
+            pObj.get_json_data_to_file(output,fromDate,toDate,asset,type_enum,product,reporttype,filter)
             logging.info("Data written to:%s",output)
         elif format=='xml':
             pObj.get_xml_data(output,fromDate,toDate,asset,type_enum,product,reporttype)
             logging.info("Data written to:%s",output)
         elif format=='csv':
             #handle csv
-            pObj.get_csv_data(output,fromDate,toDate,asset,type_enum,product,decimalformat,reporttype)
+            pObj.get_csv_data(output,fromDate,toDate,asset,type_enum,product,decimalformat,reporttype,filter)
             logging.info("Data written to:%s",output)
         elif format=='excel':
             #handle excel
-            pObj.get_excel_data(output,fromDate,toDate,asset,type_enum,product,reporttype)
+            pObj.get_excel_data(output,fromDate,toDate,asset,type_enum,product,reporttype,filter)
             logging.info("Data written to:%s",output)
         else:
             logging.info("Unknown format...")

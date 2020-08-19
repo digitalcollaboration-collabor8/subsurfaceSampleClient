@@ -25,7 +25,7 @@ class ProductionData:
         self.__token=token
 
     def get_json_data(self,period_start,period_end,entity,
-    data_type:ProductionDataType,product='', reportType=''):
+    data_type:ProductionDataType,product='', reportType='',additionalFilter=''):
         """
         Will run a GraphQL query against the Collabor8 platform and ask for production data of 
         the given type and using the specified OAuth2 token for authentication. 
@@ -40,13 +40,14 @@ class ProductionData:
         data_type : the type of production data to query for
         product: the possible product to query for e.g. gas
         reportType: the type of report to query for, default all, e.g. use MPRML-GOV, DPR and so on
+        additionalFilter: use additional filtering options to add to the query e.g. data_periods:["day"] to just include reporting period day and exclude e.g. month to date on a daily report
         """
         logging.debug("Getting production data, period start:%s, period end:%s, entity:%s, datatype:%s, product:%s",
         period_start,period_end,entity,data_type.value,product)
-        return self.__run_query(self.__build_query(period_start,period_end,entity,data_type,product,reportType))
+        return self.__run_query(self.__build_query(period_start,period_end,entity,data_type,product,reportType,additionalFilter))
     
     def get_json_data_to_file(self,output_file,period_start,period_end,entity,
-    data_type:ProductionDataType,product='',reportType=''):
+    data_type:ProductionDataType,product='',reportType='',additionalFilter=''):
         """
         Will run a GraphQL query against the Collabor8 platform and ask for production data of the given type
         and using the specified OAuth2 token for authentication. Data is returned as a json dict
@@ -59,15 +60,16 @@ class ProductionData:
         entity : name of asset/entity to query for
         data_type : the type of production data to query for
         reportType: the type of report to query for, default all, e.g. use MPRML-GOV, DPR and so on
+        additionalFilter: use additional filtering options to add to the query e.g. data_periods:["day"] to just include reporting period day and exclude e.g. month to date on a daily report
         """
-        data=self.__run_query(self.__build_query(period_start,period_end,entity,data_type,product,reportType))
+        data=self.__run_query(self.__build_query(period_start,period_end,entity,data_type,product,reportType,additionalFilter))
         with open(output_file, 'w') as fp:
             json.dump(data, fp)
     
 
 
     def get_csv_data(self,output_file,period_start,period_end,entity,
-    data_type:ProductionDataType,product='',decimal_format=',',reportType=''):
+    data_type:ProductionDataType,product='',decimal_format=',',reportType='',additionalFilter=''):
         """
         Will run a GraphQL query against the Collabor8 platform and ask for production data of the given type
         and using the specified OAuth2 token for authentication. Data is written to the specified csv file.
@@ -81,14 +83,15 @@ class ProductionData:
         data_type : the type of production data to query for
         decimal_format : the decimal format to use
         reportType: the type of report to query for, default all, e.g. use MPRML-GOV, DPR and so on
+        additionalFilter: use additional filtering options to add to the query e.g. data_periods:["day"] to just include reporting period day and exclude e.g. month to date on a daily report
         """
-        json=self.get_json_data(period_start,period_end,entity,data_type,product,reportType)
+        json=self.get_json_data(period_start,period_end,entity,data_type,product,reportType,additionalFilter)
         #convert it to a pandas frame
         frame=self.__convert_data_to_frame(json,data_type)
         frame_utils.frame_to_csv(frame,output_file,decimal_format=decimal_format)
     
     def get_xml_data(self,output_file,period_start,period_end,entity,
-    data_type:ProductionDataType,product='',reportType=''):
+    data_type:ProductionDataType,product='',reportType='',additionalFilter=''):
         '''
         Will run a graphql query and write the results to an xml file
         
@@ -100,8 +103,9 @@ class ProductionData:
         entity : name of asset/entity to query for
         data_type : the type of production data to query for
         reportType: the type of report to query for, default all, e.g. use MPRML-GOV, DPR and so on
+        additionalFilter: use additional filtering options to add to the query e.g. data_periods:["day"] to just include reporting period day and exclude e.g. month to date on a daily report
         '''
-        json=self.get_json_data(period_start,period_end,entity,data_type,product,reportType)
+        json=self.get_json_data(period_start,period_end,entity,data_type,product,reportType,additionalFilter)
         #convert it to an xml file
         xmldata=unparse(json, pretty=True)
         #write it to the file
@@ -109,7 +113,7 @@ class ProductionData:
 
 
     def get_excel_data(self,output_file,period_start,period_end,entity,
-    data_type:ProductionDataType,product='',reportType=''):
+    data_type:ProductionDataType,product='',reportType='',additionalFilter=''):
         """
         Will run a GraphQL query against the Collabor8 platform and ask for productiong data of 
         the given type and using the specified OAuth2 token for authentication. Data is as a Excel file using the specified output_file path
@@ -123,16 +127,17 @@ class ProductionData:
         entity : name of asset/entity to query for
         data_type : the type of production data to query for
         reportType: the type of report to query for, default all, e.g. use MPRML-GOV, DPR and so on
+        additionalFilter: use additional filtering options to add to the query e.g. data_periods:["day"] to just include reporting period day and exclude e.g. month to date on a daily report
         """
         json=self.get_json_data(period_start,period_end,entity,data_type,
-        product,reportType)
+        product,reportType,additionalFilter)
         #convert it to a pandas frame
         frame=self.__convert_data_to_frame(json,data_type)
         frame_utils.frame_to_excel(frame,output_file)
     
-    def __build_query(self,period_start,period_end,entity,data_type:ProductionDataType,product,reportType):
+    def __build_query(self,period_start,period_end,entity,data_type:ProductionDataType,product,reportType,additionalDataFilter=''):
         return queries.get_production_volumes_regex(period_start,
-            period_end,entity,data_type.value,product,reportType)
+            period_end,entity,data_type.value,product,reportType,additionalDataFilter)
     
     def map_str_prod_datatype_to_enum(self,data_type):
 

@@ -354,7 +354,7 @@ def get_production_volumes(period_start,period_end,entity_name,volume_type):
   return s.substitute(start=period_start,end=period_end,name=entity_name,type=volume_type)
 
 def get_production_volumes_regex(period_start,period_end,
-entity_name,volume_type,product='',reportType=''):
+entity_name,volume_type,product='',reportType='',additionalFilter=''):
   """
   Creates a production volumes query with the given period and tries to match entity names
   using a regex pattern
@@ -368,6 +368,11 @@ entity_name,volume_type,product='',reportType=''):
   addFilter=''
   if reportType!='':
     addFilter=addFilter+'source_system_names: ["'+reportType+'"] '
+  if additionalFilter!='':
+    if addFilter=='':
+      addFilter=addFilter+additionalFilter+' '
+    else:
+      addFilter=addFilter+additionalFilter+' '
   s = Template(query)
   return s.substitute(start=period_start,end=period_end,name=entity_name,type=volume_type,
   product_type=product,add_filter=addFilter)

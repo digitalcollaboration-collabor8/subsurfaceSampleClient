@@ -32,7 +32,6 @@ class Test_Graph(unittest.TestCase):
             token=authObj.authenticate()
             query_obj=graph.Graph(token)
             result=query_obj.query(test_query)
-            print ('result:'+str(result))
         except Exception as err:
             self.fail("Query failed with error:"+str(err)) 
     
