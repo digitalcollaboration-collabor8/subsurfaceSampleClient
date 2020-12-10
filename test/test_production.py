@@ -53,9 +53,9 @@ class Test_Production(unittest.TestCase):
 
     def test_production_volumes_to_excel(self):
         result_file = os.path.join(os.path.dirname(__file__)+"/data/", 'production_volumes_result.xlsx')
-        start="2017-10-31T23:00:00.000Z"
-        end="2017-11-20T12:00:00.000Z"
-        entity="34/10-A-23"
+        start="2008-01-01"
+        end="2009-12-31"
+        entity="VOLVE"
         volume_type="Production"
         query=queries.get_production_volumes(start,end,entity,volume_type)
         try:
