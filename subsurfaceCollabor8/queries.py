@@ -339,6 +339,10 @@ def get_production_volumes(period_start,period_end,entity_name,volume_type):
           uom 
           value
         }
+         dsct{
+          uom 
+          value
+        }
       }
       sourceSystemName
       sourceSystemVersion
@@ -457,6 +461,10 @@ def __get_production_query_for_product():
           uom 
           value
         }
+        dsct{
+          uom 
+          value
+        }
       }
       sourceSystemName
       sourceSystemVersion
@@ -545,6 +553,10 @@ def __get_production_query():
           value 
         }
         dscp{
+          uom 
+          value
+        }
+        dsct{
           uom 
           value
         }
