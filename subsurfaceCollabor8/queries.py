@@ -349,6 +349,16 @@ def get_production_volumes(period_start,period_end,entity_name,volume_type):
       quality
       created
       modified
+       measurements{
+        mass{
+          value
+          unitOfMeasurement
+        }
+        density{
+          value
+          unitOfMeasurement
+        }
+      }
     }
     
   }
@@ -471,6 +481,16 @@ def __get_production_query_for_product():
       quality
       created
       modified
+      measurements{
+        mass{
+          value
+          unitOfMeasurement
+        }
+        density{
+          value
+          unitOfMeasurement
+        }
+      }
     }
     
   }
@@ -566,6 +586,16 @@ def __get_production_query():
       quality
       created
       modified
+      measurements{
+        mass{
+          value
+          unitOfMeasurement
+        }
+        density{
+          value
+          unitOfMeasurement
+        }
+      }
     }
     
   }
