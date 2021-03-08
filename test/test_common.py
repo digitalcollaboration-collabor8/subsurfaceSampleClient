@@ -1,5 +1,5 @@
 import unittest
-from subsurfaceCollabor8 import common_utils as common 
+from subsurfaceCollabor8 import common_utils as common
 import datetime
 
 class Test_CommonUtils(unittest.TestCase):
