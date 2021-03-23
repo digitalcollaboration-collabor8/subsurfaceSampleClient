@@ -260,7 +260,8 @@ def get_production_volumes(period_start,period_end,entity_name,volume_type):
   period_start -> start of period
   period_end -> end of period
   entity_name -> name of entity e.g. GINA KROG
-  volume_type -> the type of volumes to fetch e.g. "Production", "Injection", "Consumption" ++
+  volume_type -> the type of volumes to fetch e.g. "Production", "Injection", "Consumption" or several in the form of
+  "Consumption","Production" ++
 
   """
   query='''
@@ -269,9 +270,9 @@ def get_production_volumes(period_start,period_end,entity_name,volume_type):
     data(
       start: "$start"
       end: "$end"
-      report_data_subtypes: ["$type"]
+      report_data_subtypes: [$type]
       entity_names: ["$name"]
-      limit: 1000
+      limit: 10000
     ) {
       sourceSystemReportName
       sourceStartTime
@@ -359,6 +360,8 @@ def get_production_volumes(period_start,period_end,entity_name,volume_type):
           unitOfMeasurement
         }
       }
+      comment
+      uid
     }
     
   }
@@ -391,19 +394,37 @@ entity_name,volume_type,product='',reportType='',additionalFilter=''):
   return s.substitute(start=period_start,end=period_end,name=entity_name,type=volume_type,
   product_type=product,add_filter=addFilter)
 
+def get_production_volumes_for_flownames(period_start,period_end,
+volume_type='',flowNames='',reportType=''):
+  """
+  Creates a production volumes query with the given period and tries to match entity names
+  using a regex pattern
+  """
+  if period_start=='' or period_end=='' or reportType=='' or flowNames=='':
+    raise Exception("Not all parameters required specified")
+    
+  addFilter=''
+  query=__get_production_query_for_flow_names()
+  if reportType!='':
+    addFilter='source_system_names: ["'+reportType+'"]'
+  
+  s = Template(query)
+  return s.substitute(start=period_start,end=period_end,type=volume_type,
+  names=flowNames,add_filter=addFilter)
 
-def __get_production_query_for_product():
+
+
+def __get_production_query_for_flow_names():
   query= '''
     query {
   production {
     data(
       start: "$start"
       end: "$end"
-      report_data_subtypes: ["$type"]
-      entity_names_rx: ["$name"]
-      products: ["$product_type"]
+      report_data_subtypes: [$type]
+      names:["$names"]
       $add_filter
-      limit: 1000
+      limit: 10000
     ) {
       sourceSystemReportName
       sourceStartTime
@@ -491,6 +512,119 @@ def __get_production_query_for_product():
           unitOfMeasurement
         }
       }
+      comment
+      uid
+    }
+   
+    
+  }
+}
+    '''
+  return query
+
+
+
+def __get_production_query_for_product():
+  query= '''
+    query {
+  production {
+    data(
+      start: "$start"
+      end: "$end"
+      report_data_subtypes: [$type]
+      entity_names_rx: ["$name"]
+      products: ["$product_type"]
+      $add_filter
+      limit: 10000
+    ) {
+      sourceSystemReportName
+      sourceStartTime
+      sourceEndTime
+      dataStartTime
+      dataEndTime
+      sourceEntity {
+        name
+        type
+      }
+      owningEntity {
+        name
+        type
+      }
+      dataEntity {
+        name
+        type
+      }
+      dataPeriod
+      name
+      type
+      product
+      productName
+      qualifier
+      volume {
+        uom
+        value
+      }
+     
+      wellMeasurements {
+        chokeSize {
+          uom
+          value
+        }
+        whp {
+          uom
+          value
+        }
+        wht {
+          uom
+          value
+        }
+        bhp {
+          uom
+          value
+        }
+        bht {
+          uom
+          value
+        }
+        operationTime{
+          uom 
+          value
+        }
+         annulusTemp
+        {
+        uom 
+        value
+        }
+        annulusPress{
+          uom 
+          value 
+        }
+        dscp{
+          uom 
+          value
+        }
+        dsct{
+          uom 
+          value
+        }
+      }
+      sourceSystemName
+      sourceSystemVersion
+      quality
+      created
+      modified
+      measurements{
+        mass{
+          value
+          unitOfMeasurement
+        }
+        density{
+          value
+          unitOfMeasurement
+        }
+      }
+      comment
+      uid
     }
     
   }
@@ -505,10 +639,10 @@ def __get_production_query():
     data(
       start: "$start"
       end: "$end"
-      report_data_subtypes: ["$type"]
+      report_data_subtypes: [$type]
       entity_names_rx: ["$name"]
       $add_filter
-      limit: 1000
+      limit: 10000
     ) {
       sourceSystemReportName
       sourceStartTime
@@ -596,6 +730,8 @@ def __get_production_query():
           unitOfMeasurement
         }
       }
+      comment
+      uid
     }
     
   }

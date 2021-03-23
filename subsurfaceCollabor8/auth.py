@@ -10,6 +10,7 @@ class AuthInfo:
     tokenUrl=None 
     resourceId=None 
     subscriptionKey=None 
+    graphUrl=None
 
 
     def __init__(self,clientId="",clientSecret="",
@@ -36,7 +37,37 @@ class AuthInfo:
         or self.resourceId==None \
         or self.subscriptionKey==None:
           raise Exception('Seems like not all required environment varible are set...')
+    
+    
+    def init_from_config_file(self,json_config):
+        """
+        Inits authentication from json config file
+        Config file in the form of
+        {
+            "AzureClientId":"XXX",
+            "AzureClientSecret":"XXXX",
+            "AzureTokenUrl":"",
+            "AzureResourceId":"",
+            "AzureSubscriptionKey":"",
+            "AzureGraphUrl":""
 
+        }
+        """
+        with open(json_config, "r") as jsonfile:
+            data = json.load(jsonfile)
+        
+        self.clientId=data['AzureClientId']
+        self.clientSecret=data['AzureClientSecret']
+        self.tokenUrl=data['AzureTokenUrl']
+        self.resourceId=data['AzureResourceId']
+        self.subscriptionKey=data['AzureSubscriptionKey']
+        self.graphUrl=data['AzureGraphUrl']
+        if self.clientId=='' \
+        or self.clientSecret=='' \
+        or self.tokenUrl==''\
+        or self.resourceId=='' \
+        or self.subscriptionKey=='':
+          raise Exception('Seems like not all required configuration varibles are set...')
 
 
 class Authenticate:

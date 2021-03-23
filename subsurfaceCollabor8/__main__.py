@@ -93,16 +93,9 @@ def drilling(datatype,format,start,end,wellbore,output,log,debug,rolldays,decima
 
 
 @click.command(name='production',help='Command to specify if production data should be extracted')
-@click.option('--datatype',
-              type=click.Choice(['Production',
-               'Injection',
-               'Consumption',
-               'Import',
-               'Export',
-               'Inventory',
-               'InstallationData'], 
-              case_sensitive=True),
-              help='The type of production data to query for, e.g. to get export volumes user "export" to get consumption (fuel/flare++) use "Consumption"',
+@click.option('--datatype', 
+              
+              help='The type of production data to query for, e.g. to get export volumes use "Export" to get consumption (fuel/flare++) use "Consumption"',
               required=True)
 @click.option('--format',
               type=click.Choice(['json', 'csv','excel','xml'], 
@@ -155,6 +148,21 @@ def production(datatype,format,start,end,asset,output,log,debug,rolldays,product
         reporttype=''
     fromDate=start 
     toDate=end
+    #check if we need to add some additional signs to the data type in case it is a single query
+    if datatype.find(',')!=-1:
+            splitted=datatype.split(',')
+            tempType=''
+            i=0
+            for item in splitted:
+                if i==0:
+                    tempType='"'+item+'"'
+                else:
+                    tempType=tempType+',"'+item+'"'
+                i=+1
+            datatype=tempType
+                
+    else:
+        datatype='"'+datatype+'"'
     #get the token first
     authInfo=auth.AuthInfo()
     authInfo.init_from_env_vars()
@@ -165,7 +173,6 @@ def production(datatype,format,start,end,asset,output,log,debug,rolldays,product
         token=authObj.authenticate()
         pObj=subsurfaceProduction.ProductionData(token)
         #map the datatype
-        type_enum=pObj.map_str_prod_datatype_to_enum(datatype)
         #need to check if we should just rolldays
         if rolldays>0:
             toDate=common_utils.format_date_to_yy_mm_dd(common_utils.add_days(datetime.today(),1))
@@ -173,18 +180,18 @@ def production(datatype,format,start,end,asset,output,log,debug,rolldays,product
         #need to handle the format
         if format=='json':
             #handle json
-            pObj.get_json_data_to_file(output,fromDate,toDate,asset,type_enum,product,reporttype,filter)
+            pObj.get_json_data_to_file(output,fromDate,toDate,asset,datatype,product,reporttype,filter)
             logging.info("Data written to:%s",output)
         elif format=='xml':
-            pObj.get_xml_data(output,fromDate,toDate,asset,type_enum,product,reporttype)
+            pObj.get_xml_data(output,fromDate,toDate,asset,datatype,product,reporttype)
             logging.info("Data written to:%s",output)
         elif format=='csv':
             #handle csv
-            pObj.get_csv_data(output,fromDate,toDate,asset,type_enum,product,decimalformat,reporttype,filter)
+            pObj.get_csv_data(output,fromDate,toDate,asset,datatype,product,decimalformat,reporttype,filter)
             logging.info("Data written to:%s",output)
         elif format=='excel':
             #handle excel
-            pObj.get_excel_data(output,fromDate,toDate,asset,type_enum,product,reporttype,filter)
+            pObj.get_excel_data(output,fromDate,toDate,asset,datatype,product,reporttype,filter)
             logging.info("Data written to:%s",output)
         else:
             logging.info("Unknown format...")

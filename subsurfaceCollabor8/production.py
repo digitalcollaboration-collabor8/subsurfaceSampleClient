@@ -25,7 +25,7 @@ class ProductionData:
         self.__token=token
 
     def get_json_data(self,period_start,period_end,entity,
-    data_type:ProductionDataType,product='', reportType='',additionalFilter=''):
+    data_type,product='', reportType='',additionalFilter=''):
         """
         Will run a GraphQL query against the Collabor8 platform and ask for production data of 
         the given type and using the specified OAuth2 token for authentication. 
@@ -43,11 +43,11 @@ class ProductionData:
         additionalFilter: use additional filtering options to add to the query e.g. data_periods:["day"] to just include reporting period day and exclude e.g. month to date on a daily report
         """
         logging.debug("Getting production data, period start:%s, period end:%s, entity:%s, datatype:%s, product:%s",
-        period_start,period_end,entity,data_type.value,product)
+        period_start,period_end,entity,data_type,product)
         return self.__run_query(self.__build_query(period_start,period_end,entity,data_type,product,reportType,additionalFilter))
     
     def get_json_data_to_file(self,output_file,period_start,period_end,entity,
-    data_type:ProductionDataType,product='',reportType='',additionalFilter=''):
+    data_type,product='',reportType='',additionalFilter=''):
         """
         Will run a GraphQL query against the Collabor8 platform and ask for production data of the given type
         and using the specified OAuth2 token for authentication. Data is returned as a json dict
@@ -69,7 +69,7 @@ class ProductionData:
 
 
     def get_csv_data(self,output_file,period_start,period_end,entity,
-    data_type:ProductionDataType,product='',decimal_format=',',reportType='',additionalFilter=''):
+    data_type,product='',decimal_format=',',reportType='',additionalFilter=''):
         """
         Will run a GraphQL query against the Collabor8 platform and ask for production data of the given type
         and using the specified OAuth2 token for authentication. Data is written to the specified csv file.
@@ -87,11 +87,11 @@ class ProductionData:
         """
         json=self.get_json_data(period_start,period_end,entity,data_type,product,reportType,additionalFilter)
         #convert it to a pandas frame
-        frame=self.__convert_data_to_frame(json,data_type)
+        frame=self.__convert_data_to_frame(json)
         frame_utils.frame_to_csv(frame,output_file,decimal_format=decimal_format)
     
     def get_xml_data(self,output_file,period_start,period_end,entity,
-    data_type:ProductionDataType,product='',reportType='',additionalFilter=''):
+    data_type,product='',reportType='',additionalFilter=''):
         '''
         Will run a graphql query and write the results to an xml file
         
@@ -113,7 +113,7 @@ class ProductionData:
 
 
     def get_excel_data(self,output_file,period_start,period_end,entity,
-    data_type:ProductionDataType,product='',reportType='',additionalFilter=''):
+    data_type,product='',reportType='',additionalFilter=''):
         """
         Will run a GraphQL query against the Collabor8 platform and ask for productiong data of 
         the given type and using the specified OAuth2 token for authentication. Data is as a Excel file using the specified output_file path
@@ -132,12 +132,12 @@ class ProductionData:
         json=self.get_json_data(period_start,period_end,entity,data_type,
         product,reportType,additionalFilter)
         #convert it to a pandas frame
-        frame=self.__convert_data_to_frame(json,data_type)
+        frame=self.__convert_data_to_frame(json)
         frame_utils.frame_to_excel(frame,output_file)
     
-    def __build_query(self,period_start,period_end,entity,data_type:ProductionDataType,product,reportType,additionalDataFilter=''):
+    def __build_query(self,period_start,period_end,entity,data_type,product,reportType,additionalDataFilter=''):
         return queries.get_production_volumes_regex(period_start,
-            period_end,entity,data_type.value,product,reportType,additionalDataFilter)
+            period_end,entity,data_type,product,reportType,additionalDataFilter)
     
     def map_str_prod_datatype_to_enum(self,data_type):
 
@@ -161,7 +161,7 @@ class ProductionData:
 
 
     
-    def __convert_data_to_frame(self,data,data_type:ProductionDataType):
+    def __convert_data_to_frame(self,data):
         return production_frames.production_volumes_to_frame(data)
     
     def __run_query(self,query):
