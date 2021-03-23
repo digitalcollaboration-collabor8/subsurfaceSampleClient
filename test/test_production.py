@@ -23,7 +23,7 @@ class Test_Production(unittest.TestCase):
         start="2017-10-31T23:00:00.000Z"
         end="2017-11-20T12:00:00.000Z"
         entity="34/10-A-23"
-        volume_type="Production"
+        volume_type='"Production"'
         query=queries.get_production_volumes(start,end,entity,volume_type)
         try:
             query_obj=graph.Graph(self.token)
@@ -38,7 +38,7 @@ class Test_Production(unittest.TestCase):
         start="2017-10-31T23:00:00.000Z"
         end="2017-11-20T12:00:00.000Z"
         entity="34/10-A-23"
-        volume_type="Production"
+        volume_type='"Production"'
         query=queries.get_production_volumes(start,end,entity,volume_type)
         try:
             query_obj=graph.Graph(self.token)
@@ -56,7 +56,7 @@ class Test_Production(unittest.TestCase):
         start="2008-01-01"
         end="2009-12-31"
         entity="VOLVE"
-        volume_type="Production"
+        volume_type='"Production"'
         query=queries.get_production_volumes(start,end,entity,volume_type)
         try:
             query_obj=graph.Graph(self.token)

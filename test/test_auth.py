@@ -33,7 +33,9 @@ class Test_TestAuthentication(unittest.TestCase):
             self.assertEqual(1,1) 
 
 
-    
+    def test_auth_init_from_config(self):
+        authInfo=auth.AuthInfo()
+        authInfo.init_from_config_file('./test/config_auth_test.json')
 
     def test_auth_from_env_variable(self):
         authInfo=auth.AuthInfo() 
