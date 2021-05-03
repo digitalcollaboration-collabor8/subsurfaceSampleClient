@@ -532,7 +532,7 @@ def __get_production_query_for_product():
       start: "$start"
       end: "$end"
       report_data_subtypes: [$type]
-      entity_names_rx: ["$name"]
+      entity_names: ["$name"]
       products: ["$product_type"]
       $add_filter
       limit: 10000
@@ -640,7 +640,7 @@ def __get_production_query():
       start: "$start"
       end: "$end"
       report_data_subtypes: [$type]
-      entity_names_rx: ["$name"]
+      entity_names: ["$name"]
       $add_filter
       limit: 10000
     ) {
