@@ -370,6 +370,130 @@ def get_production_volumes(period_start,period_end,entity_name,volume_type):
   s = Template(query)
   return s.substitute(start=period_start,end=period_end,name=entity_name,type=volume_type)
 
+
+def get_production_volumes_several_assets(period_start,period_end,entity_name,volume_type,additionalFilter=''):
+  """
+  Generates a production volumes query using enity name matching (exact match)
+
+  Parameters
+  ----------
+
+  period_start -> start of period
+  period_end -> end of period
+  entity_name -> name of entity e.g. GINA KROG
+  volume_type -> the type of volumes to fetch e.g. "Production", "Injection", "Consumption" or several in the form of
+  "Consumption","Production" ++
+
+  """
+  query='''
+    query {
+  production {
+    data(
+      start: "$start"
+      end: "$end"
+      report_data_subtypes: [$type]
+      $add_filter
+      entity_names: [$name]
+      limit: 10000
+    ) {
+      sourceSystemReportName
+      sourceStartTime
+      sourceEndTime
+      dataStartTime
+      dataEndTime
+      sourceEntity {
+        name
+        type
+      }
+      owningEntity {
+        name
+        type
+      }
+      dataEntity {
+        name
+        type
+      }
+      dataPeriod
+      name
+      type
+      product
+      productName
+      qualifier
+      volume {
+        uom
+        value
+      }
+     
+      wellMeasurements {
+        chokeSize {
+          uom
+          value
+        }
+        whp {
+          uom
+          value
+        }
+        wht {
+          uom
+          value
+        }
+        bhp {
+          uom
+          value
+        }
+        bht {
+          uom
+          value
+        }
+        operationTime{
+          uom 
+          value
+        }
+         annulusTemp
+        {
+        uom 
+        value
+        }
+        annulusPress{
+          uom 
+          value 
+        }
+        dscp{
+          uom 
+          value
+        }
+         dsct{
+          uom 
+          value
+        }
+      }
+      sourceSystemName
+      sourceSystemVersion
+      quality
+      created
+      modified
+       measurements{
+        mass{
+          value
+          unitOfMeasurement
+        }
+        density{
+          value
+          unitOfMeasurement
+        }
+      }
+      comment
+      uid
+    }
+    
+  }
+}
+    '''
+  s = Template(query)
+  return s.substitute(start=period_start,end=period_end,name=entity_name,type=volume_type,add_filter=additionalFilter)
+
+
+
 def get_production_volumes_regex(period_start,period_end,
 entity_name,volume_type,product='',reportType='',additionalFilter=''):
   """
