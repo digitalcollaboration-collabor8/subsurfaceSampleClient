@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="subsurfaceCollabor8", 
-    version="0.6",
+    version="1.1.12",
     author="Subsurface Collabor8 community",
     author_email="ep-domain@norog.no",
     license='Apache License 2.0',
