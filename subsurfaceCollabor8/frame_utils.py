@@ -41,7 +41,7 @@ float_format=None,date_format=None,quote_char='"',no_data_repr='',sep=';'):
     quotechar=quote_char,na_rep=no_data_repr,sep=sep)
 
 def frame_to_excel(frame:DataFrame,output_file:str,
-float_format=None,no_data_rep='',sheetName='Sheet1'):
+float_format=None,no_data_rep='',sheetName='Sheet1',includeOnlySm3=False):
     """
     Converts a pandas data frame to a excel file
 
@@ -51,9 +51,15 @@ float_format=None,no_data_rep='',sheetName='Sheet1'):
     output_file -> path to file to write to
     float_format -> format mask for floats e.g. '%.2f' will format to 2 decimals, default None
     no_data_rep -> how empty columns should be represented, default ''
-
+    includeOnlySm3-> will only include Sm3 volumes
     """
-    frame.to_excel(output_file,sheet_name=sheetName,
+    if includeOnlySm3:
+        #need to filter the frame to only include Sm3 volumes
+        filtered_frame=frame.loc[frame['volume.uom'] == 'Sm3'] 
+        filtered_frame.to_excel(output_file,sheet_name=sheetName,
+    float_format=float_format,na_rep=no_data_rep)
+    else:
+        frame.to_excel(output_file,sheet_name=sheetName,
     float_format=float_format,na_rep=no_data_rep)
 
 

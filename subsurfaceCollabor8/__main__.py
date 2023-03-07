@@ -140,7 +140,10 @@ def drilling(datatype,format,start,end,wellbore,output,log,debug,rolldays,decima
 @click.option('--filter',
               help='A possible additional filter to add to filter the data even more e.g. data_periods:["day"] to only include data with registered period day',
               required=False, default='')
-def production(datatype,format,start,end,asset,output,log,debug,rolldays,product,decimalformat,reporttype,filter):
+@click.option('--include_only_sm3/--all_units',
+              help='If set will filter away any non Sm3 volume units and datarows',
+              default=False)
+def production(datatype,format,start,end,asset,output,log,debug,rolldays,product,decimalformat,reporttype,filter,include_only_sm3):
     __initialize_logging(log,debug)
     logging.info("Extracting data for - dataType:%s, format:%s, start:%s, end:%s, asset:%s, output:%s, reporttype:%s",
     datatype,format,start,end,asset,output,reporttype)
@@ -191,7 +194,7 @@ def production(datatype,format,start,end,asset,output,log,debug,rolldays,product
             logging.info("Data written to:%s",output)
         elif format=='excel':
             #handle excel
-            pObj.get_excel_data(output,fromDate,toDate,asset,datatype,product,reporttype,filter)
+            pObj.get_excel_data(output,fromDate,toDate,asset,datatype,product,reporttype,filter,includeOnlySm3=include_only_sm3)
             logging.info("Data written to:%s",output)
         else:
             logging.info("Unknown format...")

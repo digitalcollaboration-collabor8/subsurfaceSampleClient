@@ -113,7 +113,7 @@ class ProductionData:
 
 
     def get_excel_data(self,output_file,period_start,period_end,entity,
-    data_type,product='',reportType='',additionalFilter=''):
+    data_type,product='',reportType='',additionalFilter='',includeOnlySm3=False):
         """
         Will run a GraphQL query against the Collabor8 platform and ask for productiong data of 
         the given type and using the specified OAuth2 token for authentication. Data is as a Excel file using the specified output_file path
@@ -133,7 +133,7 @@ class ProductionData:
         product,reportType,additionalFilter)
         #convert it to a pandas frame
         frame=self.__convert_data_to_frame(json)
-        frame_utils.frame_to_excel(frame,output_file)
+        frame_utils.frame_to_excel(frame,output_file,includeOnlySm3=includeOnlySm3)
     
     def __build_query(self,period_start,period_end,entity,data_type,product,reportType,additionalDataFilter=''):
         return queries.get_production_volumes_regex(period_start,
