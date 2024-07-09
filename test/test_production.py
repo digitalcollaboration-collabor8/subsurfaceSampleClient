@@ -67,6 +67,20 @@ class Test_Production(unittest.TestCase):
             frame_utils.frame_to_excel(normalized_frame,result_file)
             print ("Excel result written to:"+result_file)
         except Exception as err:
+            self.fail("Query production volumes failed with error:"+str(err)) 
+
+    def test_production_volumes_to_excel_alve(self):
+        result_file = os.path.join(os.path.dirname(__file__)+"/data/", 'production_volumes_result.xlsx')
+        start="2020-01-01"
+        end="2024-12-31"
+        entity="ODA"
+        volume_type='"Production"'
+       
+        try:
+            prod=production.ProductionData(self.token)
+            prod.get_excel_data(result_file,start,end,entity,volume_type)
+            print ("Excel result written to:"+result_file)
+        except Exception as err:
             self.fail("Query production volumes failed with error:"+str(err))         
     
     

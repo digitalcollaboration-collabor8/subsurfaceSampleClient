@@ -1,6 +1,35 @@
 from string import Template
 
 
+def get_entities_query(assetName):
+  """
+  Generates an query to get all accessible entities for a given field (well, wellbore,platform)
+  """
+  query='''
+  query{
+    metadata {
+      fields(
+        name:["$entity_name"]
+        accessible:true
+      )
+      {
+        name
+        wells{
+          name
+        }
+        wellbores{
+          name
+        }
+        platforms{
+          name
+        }
+      }
+    }
+  }
+  '''
+  s = Template(query)
+  return s.substitute(entity_name=assetName)
+
 def get_drilling_activity_query(period_start,period_end,wellborename):
     """
     Generates a GraphQL query for getting wellbore activity information in given period and for given wellbore
@@ -271,7 +300,7 @@ def get_production_volumes(period_start,period_end,entity_name,volume_type):
       start: "$start"
       end: "$end"
       report_data_subtypes: [$type]
-      entity_names: ["$name"]
+      data_entity_names: [$name]
       limit: 10000
     ) {
       sourceSystemReportName
@@ -393,7 +422,7 @@ def get_production_volumes_several_assets(period_start,period_end,entity_name,vo
       end: "$end"
       report_data_subtypes: [$type]
       $add_filter
-      entity_names: [$name]
+      data_entity_names: [$name]
       limit: 10000
     ) {
       sourceSystemReportName
@@ -517,6 +546,8 @@ entity_name,volume_type,product='',reportType='',additionalFilter=''):
   s = Template(query)
   return s.substitute(start=period_start,end=period_end,name=entity_name,type=volume_type,
   product_type=product,add_filter=addFilter)
+
+
 
 def get_production_volumes_for_flownames(period_start,period_end,
 volume_type='',flowNames='',reportType=''):
@@ -656,7 +687,7 @@ def __get_production_query_for_product():
       start: "$start"
       end: "$end"
       report_data_subtypes: [$type]
-      entity_names: ["$name"]
+      data_entity_names: [$name]
       products: ["$product_type"]
       $add_filter
       limit: 10000
@@ -764,7 +795,7 @@ def __get_production_query():
       start: "$start"
       end: "$end"
       report_data_subtypes: [$type]
-      entity_names: ["$name"]
+      data_entity_names: [$name]
       $add_filter
       limit: 10000
     ) {
@@ -862,3 +893,5 @@ def __get_production_query():
 }
     '''
   return query
+
+

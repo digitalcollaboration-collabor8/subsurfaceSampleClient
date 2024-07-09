@@ -1,6 +1,7 @@
 from subsurfaceCollabor8 import queries
 from subsurfaceCollabor8 import auth
 from subsurfaceCollabor8 import graph
+from subsurfaceCollabor8 import metadata
 from subsurfaceCollabor8 import production_frames
 from subsurfaceCollabor8 import frame_utils
 from subsurfaceCollabor8 import common_utils
@@ -44,7 +45,19 @@ class ProductionData:
         """
         logging.debug("Getting production data, period start:%s, period end:%s, entity:%s, datatype:%s, product:%s",
         period_start,period_end,entity,data_type,product)
-        return self.__run_query(self.__build_query(period_start,period_end,entity,data_type,product,reportType,additionalFilter))
+        #get the entity names needed for the given asset
+        metaData=metadata.MetaData(self.__token)
+        dataEntities=metaData.get_data_entities_for_field(entity)
+        #generate the query string
+        names=""
+        i=0
+        for entity in dataEntities:
+            if i==0:
+                names=names+'"'+entity+'"'
+            else:
+                names=names+',"'+entity+'"'
+            i=i+1
+        return self.__run_query(self.__build_query(period_start,period_end,names,data_type,product,reportType,additionalFilter))
     
     def get_json_data_to_file(self,output_file,period_start,period_end,entity,
     data_type,product='',reportType='',additionalFilter=''):
@@ -62,7 +75,19 @@ class ProductionData:
         reportType: the type of report to query for, default all, e.g. use MPRML-GOV, DPR and so on
         additionalFilter: use additional filtering options to add to the query e.g. data_periods:["day"] to just include reporting period day and exclude e.g. month to date on a daily report
         """
-        data=self.__run_query(self.__build_query(period_start,period_end,entity,data_type,product,reportType,additionalFilter))
+        #get the entity names needed for the given asset
+        metaData=metadata.MetaData(self.__token)
+        dataEntities=metaData.get_data_entities_for_field(entity)
+        #generate the query string
+        names=""
+        i=0
+        for entity in dataEntities:
+            if i==0:
+                names=names+'"'+entity+'"'
+            else:
+                names=names+',"'+entity+'"'
+            i=i+1
+        data=self.__run_query(self.__build_query(period_start,period_end,names,data_type,product,reportType,additionalFilter))
         with open(output_file, 'w') as fp:
             json.dump(data, fp)
     

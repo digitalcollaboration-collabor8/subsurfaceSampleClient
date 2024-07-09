@@ -5,6 +5,12 @@ import sys
 from subsurfaceCollabor8 import production_frames
 class Test_TestQueries(unittest.TestCase):
 
+    def test_entity_names(self):
+        entity_name="FENJA"
+        result=queries.get_entities_query(entity_name)
+        print(result)
+
+
     def test_drilling_activity(self):
         start="2020-01-21T23:00:00.000Z"
         end="2020-03-26T12:00:00.000Z"
