@@ -18,7 +18,6 @@ class MetaData:
         '''
         entities=[]
         query=queries.get_entities_query(assetName)
-        print (query)
         logging.debug("Generated entity names query:%s".format(query))
         #run the query
         entitityData=self.__run_query(query)
